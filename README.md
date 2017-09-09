@@ -47,11 +47,11 @@ Software used in tutorial (other versions should work fine but this is what I us
 6. Open SSMS and enter the Server name, username, and password. 
 7. Create a new table that looks exactly like the following (two columns which are "ID" and "Description", "ID" should be an int and "Description" should be type VARCHAR(500)): 
 
-ID | Description
------------- | -------------
-1 | Buy ketchup
-2 | Eat a hot dog
-3 | Hug a puppy
+      ID | Description
+      ------------ | -------------
+      1 | Buy ketchup
+      2 | Eat a hot dog
+      3 | Hug a puppy
 
 8. Download this whole project, either as a zip file or using Git.  
 9. Create the 5 stored procedures which are found in the project folder: 
@@ -78,6 +78,9 @@ ID | Description
 
 # [Part 3]: Setup a VSTS Account, Multiple Environments, and Continuous Integration
 1. Create a VSTS account at this URL: 
+2. Create 3 environments
+3. Check in code to each one by .. 
+
 
 # [Part 4]: Setup VSTS Continuous Deployment, Test Multiple Environments end to end
-1. 
+1. Go to the Releases tab
