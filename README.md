@@ -1,5 +1,7 @@
 # ToDoListAzure
-This is a simple proof of concept to display an Azure App Service website communciating with an API project, which communicates to an Azure SQL backend.  The app is a to-do application based on Microsoft's ToDo List app, but adapted for Azure deploy and to Visual Studio 2017 Preview.
+This is a simple proof of concept to display an Azure App Service website communciating with an API project, which communicates to an Azure SQL backend.  The app is a To-Do application based on Microsoft's To-Do List app, but adapted for Azure deploy and to Visual Studio 2017 Preview.  
+
+The primary objective of the tutorial is to show you how to deploy an Azure App Service Website + App Service API + Azure SQL and how to get it all working with a simple To-Do application. Also I am reviving the older post to update the project to Visual Studio 2017.  I hope that this is helpful to either enterprise web developers about using Azure and linking a 3 part project, or if you are a beginner this is a good project for you to learn how to code and how to use Azure.  I will only address how to deploy and setup CI/CD in this tutorial. If you are new to coding and wanted to go through what the code is actually doing this is a great beginner project to learn API's and how a simple end-to-end solution works. 
 
 ![alt text](https://docs.microsoft.com/en-us/azure/app-service-api/media/app-service-api-dotnet-get-started/todospa.png)
 
