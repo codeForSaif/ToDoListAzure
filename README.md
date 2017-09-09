@@ -15,7 +15,7 @@ Software used in tutorial (other versions should work fine but this is what I us
 
 ### Overview of guide:
 **Part 1: Setup the Azure SQL Database**
-1. Setup an Azure SQL database using the Azure Portal
+1. Setup an Azure SQL database using the Azure Portal.  
 2. Sign into the database using SQL Server Management Studio
 3. Create a table with an ID and Description
 4. Create 5 stored procedures
@@ -42,12 +42,19 @@ Software used in tutorial (other versions should work fine but this is what I us
 
 # [Part 1]: Setup the Azure SQL Database
 1. Go to the Azure Portal at portal.azure.com
-2. Create a new SQL Database
-3. 
-4. Make sure you create a username and password that you will remember, you will need this to login using SQL Server Management Studio (SSMS). 
-5. Save the Server name from the main Overview tab of your new Azure SQL DB. 
+2. Create a new SQL Database. Click "+ New", select Databases, choose SQL Database, then lastly hit Create. 
+      ![Alt text](/Images/Part1/01SelectSQLDBPortal.png?raw=true "Azure Portal: how to select a SQL DB")
+3. Fill in all of the highlighted inputs.  Click on Server and Pricing Tier to get slideout options.  In the Server slideout, make sure you create a username and password that you will remember, you will need this to login using SQL Server Management Studio (SSMS).  In the Pricing Tier, change to Basic so it only costs about $5 per month. Your screen will look approximately like this:
+      ![Alt text](/Images/Part1/02DBOptions.png?raw=true "Creating a SQL DB")
+4. Click on All Resources on the left menu. You should see your new SQL Server and SQL Database. Click on the SQL Database. 
+      ![Alt text](/Images/Part1/03AllResources.png?raw=true "Select your SQL DB")
+5. You land on the Overview tab.  Save the Server name from the main Overview tab of your new Azure SQL DB. Click on the Show Connection Strings hyperlink highlighted.
+      ![Alt text](/Images/Part1/05DatabaseOverview.png?raw=true "SQL DB Overview tab")
+  The connection string page will look like this (save this in a Notepad for the web.config in the solution later):
+      ![Alt text](/Images/Part1/06ConnectionString.png?raw=true "SQL DB Overview tab")
 6. Open SSMS and enter the Server name, username, and password. 
-7. Create a new table that looks exactly like the following (two columns which are "ID" and "Description", "ID" should be an int and "Description" should be type VARCHAR(500)): 
+      ![Alt text](/Images/Part1/07SSMS.png?raw=true "SSMS Login")
+7. Create a new table that looks exactly like the following format (two columns which are "ID" and "Description", "ID" should be an int and "Description" should be type VARCHAR(500)).. you can make the description anything you'd like: 
 
       ID | Description
       ------------ | -------------
@@ -55,9 +62,12 @@ Software used in tutorial (other versions should work fine but this is what I us
       2 | Eat a hot dog
       3 | Hug a puppy
 
+      ![Alt text](/Images/Part1/07SSMS.png?raw=true "Table Structure")
+
 8. Download this whole project, either as a zip file or using Git.  
-9. Create the 5 stored procedures which are found in the project folder: 
+9. Create the 5 stored procedures which are found in the root project folder (open Stored Procedure in SSMS and hit Execute and since they are "Create Stored Proc" types you should see them appear in the Stored Proc folder as shown in screenshot in next step): ** StoredProcedures **
 10. Your Azure SQL database should look something like this now: 
+      ![Alt text](/Images/Part1/09StoredProcs.png?raw=true "SSMS Stored Procedures")
 
 # [Part 2]: Setup the C# Project
 1. Download this project if you haven't already (your should have in Part 1, step 9 though). 
