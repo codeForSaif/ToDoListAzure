@@ -65,7 +65,7 @@ Software used in tutorial (other versions should work fine but this is what I us
       ![Alt text](/Images/Part1/08Table.png?raw=true "Table Structure")
 
 8. Download this whole project, either as a zip file or using Git.  
-9. Create the 5 stored procedures which are found in the root project folder (open Stored Procedure in SSMS and hit Execute and since they are "Create Stored Proc" types you should see them appear in the Stored Proc folder as shown in screenshot in next step): ** StoredProcedures **
+9. Create the 5 stored procedures which are found in the root project folder (open Stored Procedure in SSMS and hit Execute and since they are "Create Stored Proc" types you should see them appear in the Stored Proc folder as shown in screenshot in next step): **StoredProcedures**
 10. Your Azure SQL database should look something like this now: 
       ![Alt text](/Images/Part1/09StoredProcs.png?raw=true "SSMS Stored Procedures")
 
