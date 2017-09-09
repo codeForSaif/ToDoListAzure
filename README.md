@@ -24,7 +24,7 @@ Software used in tutorial (other versions should work fine but this is what I us
 1. Pull down the GitHub project
 2. Make sure it builds locally
 3. Test the Azure project connects locally to the Azure SQL DB 
-4. Deploy the API project to Azure and ensure it still connects to Azure SQL
+4. Deploy the API project to Azure
 5. Test the Web App can connect to tne Azure Web API project you just deployed 
 6. Deploy the Web App
 7. You should have a working app! Test it out by hitting the web front end website and checking your SQL DB!
@@ -94,15 +94,29 @@ Software used in tutorial (other versions should work fine but this is what I us
 14. Your SSMS table should look like this now:
       ![Alt text](/Images/Part2/07.png?raw=true "SSMS Table Updated")
 15. You have now tested all of the APIs and seen that your API project is linked to your Azure SQL DB. 
-16. Let's publish the API project, stop running it.  Right click on the project
+16. Let's publish the API project, stop running it.  Right click on the API project adn choose Publish.
       ![Alt text](/Images/Part2/08.png?raw=true "Publishing the API project")
-17. The settings
-18. Hit Publish
-19. Verify it shows up in the Azure Portal
-20. Let's connect the front end to the API / Azure SQL Project.
-21. Run the front end as Startup. It should look like this.
-21. Let's do the same publishing to Azure for the front end project
-
+17. Choose an App Service.
+      ![Alt text](/Images/Part2/09.png?raw=true "Publishing the API project")
+18. Fill in all the settings: add in a name, choose the subscription, create a new resource group. For the App Service Plan: choose a name, the closest location to you and Free. Then on the main modal click Create. 
+      ![Alt text](/Images/Part2/10.png?raw=true "Publishing the API project")
+      ![Alt text](/Images/Part2/11.png?raw=true "Publishing the API project")
+19. Make sure it shows up in the Azure Portal after giving it a few minutes to publish. Click on the API project to go to the overview (red arrow).
+      ![Alt text](/Images/Part2/12.png?raw=true "Publishing the API project")
+20. Copy the URL of the API App Service as highlighted in the screenshot. 
+      ![Alt text](/Images/Part2/13.png?raw=true "Connecting your local front end project to the Azure API Service")
+21. Let's connect the front end to the API project.  Go to the web.config file of your front end ToDoListAngular project. Paste in the URL from the previous step. 
+      ![Alt text](/Images/Part2/14.png?raw=true "Connecting your local front end project to the Azure API Service")
+22. Run the front end as Startup. It should look like this and be connected to the Azure API Service.
+      ![Alt text](/Images/Part2/18.png?raw=true "Connecting your local front end project to the Azure API Service")
+21. Let's do the same publishing to Azure for the front end project.  Repeat steps 16-18 for the front end ToDoListAngular project. 
+22. Verify once you are done Publishing that it is in the Azure Portal.  Click on the APp Service (red arrow in screenshot). 
+      ![Alt text](/Images/Part2/15.png?raw=true "Connecting your local front end project to the Azure API Service")
+23. On the Overview page, get the URL and copy it. 
+      ![Alt text](/Images/Part2/16.png?raw=true "Connecting your local front end project to the Azure API Service")
+24. Paste the URL into your browser and click on the Todo tab to see the Todo list. You should now have a working Azure App Service Web  front end talking to an Azure App Service API which connects to Azure SQL. 
+      ![Alt text](/Images/Part2/17.png?raw=true "Connecting your local front end project to the Azure API Service")
+      
 # [Part 3]: Setup a VSTS Account, Multiple Environments, and Continuous Integration
 1. Create a VSTS account at this URL: 
 2. Create 3 environments
