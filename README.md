@@ -62,7 +62,7 @@ Software used in tutorial (other versions should work fine but this is what I us
       2 | Eat a hot dog
       3 | Hug a puppy
 
-      ![Alt text](/Images/Part1/07SSMS.png?raw=true "Table Structure")
+      ![Alt text](/Images/Part1/08Table.png?raw=true "Table Structure")
 
 8. Download this whole project, either as a zip file or using Git.  
 9. Create the 5 stored procedures which are found in the root project folder (open Stored Procedure in SSMS and hit Execute and since they are "Create Stored Proc" types you should see them appear in the Stored Proc folder as shown in screenshot in next step): ** StoredProcedures **
@@ -75,18 +75,32 @@ Software used in tutorial (other versions should work fine but this is what I us
 3. Set the ToDoListDataAPI project as the Startup Project. 
 4. Run the project. 
 5. Add "/swagger" to the end of your URL if it is not already there, you should see a page like this: 
-6. Go to your Azure Portal and get the connection string from your Azure SQL DB. It will be found:
+      ![Alt text](/Images/Part2/01.png?raw=true "Swagger main page")
+6. Go to your Azure Portal and get the connection string from your Azure SQL DB. You should have saved this in a Notepad from Part 1, step 5.
 7. Add this to your web.config file. Your web.config file should look like this:
+      ![Alt text](/Images/Part2/02.png?raw=true "Web config with Connection String")
 8. Save, run your project again, and add the "/swagger" if needed. 
-9. Try to run a GET all, you should see:
-10. Try to run a POST, you should see (also check in SSMS and refresh your table):
+9. Try to run a GET all which is the first API on the page /api/ToDoList, you should see:
+      ![Alt text](/Images/Part2/03.png?raw=true "More Swagger API calls..")
+10. Try to run a POST, first click where the screenshot shows, and fill in an ID with 10 and any description you want.  You should see (also check in SSMS and refresh your table):
+      ![Alt text](/Images/Part2/03.png?raw=true "More Swagger API calls..")
 11. Try to run a GET all again, you should see your added value:
-12. Try to run a PUT:
-13. Try to run a GET by ID:
+      ![Alt text](/Images/Part2/04.png?raw=true "More Swagger API calls..")
+12. Try to run a PUT, again click to get the format from where it's shown in the screenshot and modify an existing record's description, remember the ID number is 10 for the next step:
+      ![Alt text](/Images/Part2/05.png?raw=true "More Swagger API calls..")
+13. Try to run a GET by ID, use 10:
+      ![Alt text](/Images/Part2/06.png?raw=true "More Swagger API calls..")
 14. Your SSMS table should look like this now:
+      ![Alt text](/Images/Part2/07.png?raw=true "SSMS Table Updated")
 15. You have now tested all of the APIs and seen that your API project is linked to your Azure SQL DB. 
-16. Let's publish the API project, right click on the project
-17. 
+16. Let's publish the API project, stop running it.  Right click on the project
+      ![Alt text](/Images/Part2/08.png?raw=true "Publishing the API project")
+17. The settings
+18. Hit Publish
+19. Verify it shows up in the Azure Portal
+20. Let's connect the front end to the API / Azure SQL Project.
+21. Run the front end as Startup. It should look like this.
+21. Let's do the same publishing to Azure for the front end project
 
 # [Part 3]: Setup a VSTS Account, Multiple Environments, and Continuous Integration
 1. Create a VSTS account at this URL: 
