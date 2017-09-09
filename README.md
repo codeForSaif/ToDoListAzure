@@ -75,13 +75,13 @@ Software used in tutorial (other versions should work fine but this is what I us
 3. Set the ToDoListDataAPI project as the Startup Project. 
 4. Run the project. 
 5. Add "/swagger" to the end of your URL if it is not already there, you should see a page like this: 
-      ![Alt text](/Images/Part2/01.png?raw=true "Swagger main page")
+      ![Alt text](/Images/Part2/00.png?raw=true "Swagger main page")
 6. Go to your Azure Portal and get the connection string from your Azure SQL DB. You should have saved this in a Notepad from Part 1, step 5.
-7. Add this to your web.config file. Your web.config file should look like this:
-      ![Alt text](/Images/Part2/02.png?raw=true "Web config with Connection String")
+7. Add your connection string to your web.config file in your ToDoListDataAPI project.  Just delete whatever is in connectionString="" and add your value in. Don't forget to manually put in your username and password where it is blank! Your web.config file should look like this:
+      ![Alt text](/Images/Part2/01.png?raw=true "Web config with Connection String")
 8. Save, run your project again, and add the "/swagger" if needed. 
 9. Try to run a GET all which is the first API on the page /api/ToDoList, you should see:
-      ![Alt text](/Images/Part2/03.png?raw=true "More Swagger API calls..")
+      ![Alt text](/Images/Part2/02.png?raw=true "More Swagger API calls..")
 10. Try to run a POST, first click where the screenshot shows, and fill in an ID with 10 and any description you want.  You should see (also check in SSMS and refresh your table):
       ![Alt text](/Images/Part2/03.png?raw=true "More Swagger API calls..")
 11. Try to run a GET all again, you should see your added value:
@@ -106,7 +106,15 @@ Software used in tutorial (other versions should work fine but this is what I us
 1. Create a VSTS account at this URL: 
 2. Create 3 environments
 3. Check in code to each one by .. 
-
+Go to the Build tab.
+Create a new Build.
+Click on the Triggers tab.
+Check the box so it will create a build with every check in.
+You have now setup the Dev build. 
+Go to the QA environment. Repeat the process for this enviroment and Prod. 
 
 # [Part 4]: Setup VSTS Continuous Deployment, Test Multiple Environments end to end
 1. Go to the Releases tab
+Hit Create a new release
+
+*Research requiring approval for QA/Prod builds to go through
