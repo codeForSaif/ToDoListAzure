@@ -37,3 +37,17 @@ C:\Users\crtenn\Google Drive\Microsoft\2017-2018 Q1 Work\04 Texas Mutual\Day 2 -
 C:\Users\crtenn\Google Drive\Microsoft\2017-2018 Q1 Work\04 Texas Mutual\Day 2 - Azure\03 POC\src\ToDoListDataAPI\bin\System.Data.Common.dll
 C:\Users\crtenn\Google Drive\Microsoft\2017-2018 Q1 Work\04 Texas Mutual\Day 2 - Azure\03 POC\src\ToDoListDataAPI\bin\System.Data.SqlClient.dll
 C:\Users\crtenn\Google Drive\Microsoft\2017-2018 Q1 Work\04 Texas Mutual\Day 2 - Azure\03 POC\src\ToDoListDataAPI\obj\Debug\ToDoListDataAPI.csprojResolveAssemblyReference.cache
+C:\Users\crtenn\Desktop\Azure CI CD\ToDoListDataAPI\obj\Debug\ToDoListDataAPI.csproj.CoreCompileInputs.cache
+C:\Users\crtenn\Desktop\Azure CI CD\ToDoListDataAPI\obj\Debug\ToDoListDataAPI.dll
+C:\Users\crtenn\Desktop\Azure CI CD\ToDoListDataAPI\obj\Debug\ToDoListDataAPI.pdb
+C:\Users\crtenn\Desktop\Azure CI CD\ToDoListDataAPI\bin\ToDoListDataAPI.dll.config
+C:\Users\crtenn\Desktop\Azure CI CD\ToDoListDataAPI\bin\ToDoListDataAPI.dll
+C:\Users\crtenn\Desktop\Azure CI CD\ToDoListDataAPI\bin\ToDoListDataAPI.pdb
+C:\Users\crtenn\Desktop\Azure CI CD\ToDoListDataAPI\bin\Newtonsoft.Json.dll
+C:\Users\crtenn\Desktop\Azure CI CD\ToDoListDataAPI\bin\System.Net.Http.Formatting.dll
+C:\Users\crtenn\Desktop\Azure CI CD\ToDoListDataAPI\bin\System.Web.Http.dll
+C:\Users\crtenn\Desktop\Azure CI CD\ToDoListDataAPI\bin\System.Web.Http.WebHost.dll
+C:\Users\crtenn\Desktop\Azure CI CD\ToDoListDataAPI\bin\Newtonsoft.Json.xml
+C:\Users\crtenn\Desktop\Azure CI CD\ToDoListDataAPI\bin\System.Net.Http.Formatting.xml
+C:\Users\crtenn\Desktop\Azure CI CD\ToDoListDataAPI\bin\System.Web.Http.xml
+C:\Users\crtenn\Desktop\Azure CI CD\ToDoListDataAPI\bin\System.Web.Http.WebHost.xml
