@@ -124,14 +124,14 @@ Software used in tutorial:
 [image]
 3. Pick a name for your account, hit Continue, and make the account.  
 [image]
-4. Create a new Project using Git version control and Agile.  
+4. Create a 2 new Projects using Git version control and Agile.  One should be called ToDoListAngular and the other ToDoListDataAPI.
 [image]
-5. Add the code for this project. Go to the root folder of the project (should look like below), right click and select Git Bash. *Note if you pulled this down in as a zip file, go to the next step.  If you pulled it down using Git Bash originally, make Hidden Folders visible, then delelte the .git folder before continuing. 
+5a. Split your ToDoListAngular and ToDoListDataAPI into two separate solutions with separate .sln files. 
+5b. Add the code for both solutions separately. Go to the root folder of the ToDoListAngular solution (should look like below), right click and select Git Bash. *Note if you pulled this down in as a zip file, go to the next step.  If you pulled it down using Git Bash originally, make Hidden Folders visible, then delelte the .git folder before continuing.*
+5c. Repeat 5b for the ToDoListDataAPI project.
 [image]
-
 Also get the URL of your Project by going to the Code tab:
 [image]
-
 6. Run the following commands in order, one by one. Make sure on the 4th command you change the URL to your project URL. 
       ```
       git init
@@ -141,21 +141,23 @@ Also get the URL of your Project by going to the Code tab:
       git push -u origin --all
       ```
 
-7. Go to VSTS and refresh, you should see your code there:
+7. Go to VSTS and refresh, you should see your code there for both projects:
 [image]
-
-8. Stay under the Code tab, then click on the Branches sub-tab. Click on New Branch. Create a Dev, QA, and Prod branch all based off master branch. 
+8. Under the Code tab for each of your two Solutions, click on the Branches sub-tab. Click on New Branch. Create a Dev, QA, and Prod branch all based off master branch. Right click on your old master branch, and delete it.
 [image]
-
-9.  Right click on your old master branch, and delete it.
 [image]
-
+9.  ???
 10. Right click on Prod, and select Branch Security.  You can assign groups to manage your branches.  I recommend giving a DevOps team and the architects/senior lead devs the Prod rights to allow merges into it.  I recommend that QA have rights over their branch so that they can choose when they are ready to recieve new changes, and that the developers let QA know when they are done with a solid build and the build #.  Optionally, the DevOps team can manage the QA branch also.  Dev branch should be free for all the developers on the team to run the CI/CD process on their own.  We will not choose any of these options for now as this project includes only you, but please be aware of it in an enterprise setting. 
 [image]
-
-11. Right click on Prod, and select Policies.  Check the box for Protect this Branch to see all the options.  This will allow you to have required pull requests, a certain number of reviewers, build validation, automatically include some reviewers, and other settings.  Please review the options here.  We will not choose any of these options for now as this project includes only you, but please be aware of it in an enterprise setting. So just navigate away from this page so you do not save anything. 
-
-12. 
+11. Right click on Prod, and select Policies.  Check the box for Protect this Branch to see all the options.  This will allow you to have required pull requests, a certain number of reviewers, build validation, automatically include some reviewers, and other settings.  Please review the options here.  We will not choose any of these options for now as this project includes only you, but please be aware of it in an enterprise setting. Navigate away from this page by clicking Build & Release and do not save anything. 
+[image]
+12. On the Build and Release tab, click "+ New" 
+[image]
+13. Choose the Azure Web App template and hit Apply. 
+[image]
+14. On the next landing page,  
+[image 11]
+[image 11b]
 
 Go to the Build tab.
 Create a new Build.
