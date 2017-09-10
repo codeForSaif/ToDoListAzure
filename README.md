@@ -7,9 +7,10 @@ The primary objective of the tutorial is to show you how to deploy an Azure App 
 
 The code is based on this tutorial here: https://docs.microsoft.com/en-us/azure/app-service-api/app-service-api-dotnet-get-started
 
-Software used in tutorial (other versions should work fine but this is what I used, note I will not be covering how to install these and will assume you have them already or can find another tutorial if needed to install these):
-* Visual Studio 2017 Preview
-* Sql Server Management Server 2016
+Software used in tutorial:
+* Visual Studio 2017 Preview (I am sure any version of VS2017 is fine).
+* Sql Server Management Server 2016 (I am sure any reasonably current SSMS version is fine).
+* Git Bash
 * Azure subscription
 * Visual Studio Team Services (VSTS) for CI/CD portion
 
@@ -76,10 +77,10 @@ Software used in tutorial (other versions should work fine but this is what I us
 3. Set the ToDoListDataAPI project as the Startup Project. 
 4. Run the project. 
 5. Add "/swagger" to the end of your URL if it is not already there, you should see a page like this: 
-      ![Alt text](/Images/Part2/00.png?raw=true "Swagger main page")
+      ![Alt text](/Images/Part2/01.png?raw=true "Swagger main page")
 6. Go to your Azure Portal and get the connection string from your Azure SQL DB. You should have saved this in a Notepad from Part 1, step 5.
 7. Add your connection string to your web.config file in your ToDoListDataAPI project.  Just delete whatever is in connectionString="" and add your value in. Don't forget to manually put in your username and password where it is blank! Your web.config file should look like this:
-      ![Alt text](/Images/Part2/01.png?raw=true "Web config with Connection String")
+      ![Alt text](/Images/Part2/00.png?raw=true "Web config with Connection String")
 8. Save, run your project again, and add the "/swagger" if needed. 
 9. Try to run a GET all which is the first API on the page /api/ToDoList, you should see:
       ![Alt text](/Images/Part2/02.png?raw=true "More Swagger API calls..")
@@ -105,7 +106,7 @@ Software used in tutorial (other versions should work fine but this is what I us
       ![Alt text](/Images/Part2/12.png?raw=true "Publishing the API project")
 20. Copy the URL of the API App Service as highlighted in the screenshot. 
       ![Alt text](/Images/Part2/13.png?raw=true "Connecting your local front end project to the Azure API Service")
-21. Let's connect the front end to the API project.  Go to the web.config file of your front end ToDoListAngular project. Paste in the URL from the previous step. 
+21. Let's connect the front end to the API project.  Open up the ToDoListAngular solution.  Go to the web.config file of your front end ToDoListAngular project. Paste in the URL from the previous step. 
       ![Alt text](/Images/Part2/14.png?raw=true "Connecting your local front end project to the Azure API Service")
 22. Run the front end as Startup. It should look like this and be connected to the Azure API Service.
       ![Alt text](/Images/Part2/18.png?raw=true "Connecting your local front end project to the Azure API Service")
@@ -118,9 +119,44 @@ Software used in tutorial (other versions should work fine but this is what I us
       ![Alt text](/Images/Part2/17.png?raw=true "Connecting your local front end project to the Azure API Service")
       
 # [Part 3]: Setup a VSTS Account, Multiple Environments, and Continuous Integration
-1. Create a VSTS account at this URL: 
-2. Create 3 environments
-3. Check in code to each one by .. 
+1. Create a VSTS account by hitting Sign In on the top right of the page at this URL: https://www.visualstudio.com/team-services/
+2. Create a new VSTS Account by hitting the button on the top right. 
+      ![Alt text](/Images/Part3/00.png?raw=true)
+3. Pick a name for your account, hit Continue, and make the account.  
+      ![Alt text](/Images/Part3/01.png?raw=true)
+4. Create a new Project using Git version control and Agile called ToDoListAngular.
+      ![Alt text](/Images/Part3/02.png?raw=true)
+5. Add the code for ToDoListAngular. Go to the root folder of the ToDoListAngular solution (should look like below), right click and select Git Bash. *Note if you pulled this down in as a zip file, go to the next step.  If you pulled it down using Git Bash originally, make Hidden Folders visible, then delelte the .git folder before continuing.*
+      ![Alt text](/Images/Part3/03.png?raw=true)
+Also get the URL of your Project by going to the Code tab:
+      ![Alt text](/Images/Part3/03b.png?raw=true)
+6. Run the following commands in order, one by one. Make sure on the 4th command you change the URL to your project URL. 
+      ```
+      git init
+      git add .
+      git commit -m "My first commit. Adding Todo project."
+      git remote add origin https://YOURPROJECT.visualstudio.com/_git/AzureWebApp
+      git push -u origin --all
+      ```
+
+7. Go to VSTS and refresh, you should see your code there:
+      ![Alt text](/Images/Part3/04.png?raw=true)
+8.  Repeat steps 4-7 for the ToDoListDataAPI project. 
+9.  Under the Code tab for each of your two Solutions, click on the Branches sub-tab. Click on New Branch. Create a Dev, QA, and Prod branch all based off master branch. Right click on your old master branch, and delete it.
+      ![Alt text](/Images/Part3/05.png?raw=true)
+      ![Alt text](/Images/Part3/06.png?raw=true)
+10. Right click on Prod, and select Branch Security.  You can assign groups to manage your branches.  I recommend giving a DevOps team and the architects/senior lead devs the Prod rights to allow merges into it.  I recommend that QA have rights over their branch so that they can choose when they are ready to recieve new changes, and that the developers let QA know when they are done with a solid build and the build #.  Optionally, the DevOps team can manage the QA branch also.  Dev branch should be free for all the developers on the team to run the CI/CD process on their own.  We will not choose any of these options for now as this project includes only you, but please be aware of it in an enterprise setting. 
+      ![Alt text](/Images/Part3/07.png?raw=true)
+11. Right click on Prod, and select Policies.  Check the box for Protect this Branch to see all the options.  This will allow you to have required pull requests, a certain number of reviewers, build validation, automatically include some reviewers, and other settings.  Please review the options here.  We will not choose any of these options for now as this project includes only you, but please be aware of it in an enterprise setting. Navigate away from this page by clicking Build & Release and do not save anything. 
+      ![Alt text](/Images/Part3/08.png?raw=true)
+12. On the Build and Release tab, click "+ New" 
+      ![Alt text](/Images/Part3/09.png?raw=true)
+13. Choose the Azure Web App template and hit Apply. 
+      ![Alt text](/Images/Part3/10.png?raw=true)
+14. On the next landing page,  
+      ![Alt text](/Images/Part3/11.png?raw=true)
+      ![Alt text](/Images/Part3/11b.png?raw=true)
+
 Go to the Build tab.
 Create a new Build.
 Click on the Triggers tab.
