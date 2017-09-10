@@ -106,7 +106,7 @@ Software used in tutorial:
       ![Alt text](/Images/Part2/12.png?raw=true "Publishing the API project")
 20. Copy the URL of the API App Service as highlighted in the screenshot. 
       ![Alt text](/Images/Part2/13.png?raw=true "Connecting your local front end project to the Azure API Service")
-21. Let's connect the front end to the API project.  Go to the web.config file of your front end ToDoListAngular project. Paste in the URL from the previous step. 
+21. Let's connect the front end to the API project.  Open up the ToDoListAngular solution.  Go to the web.config file of your front end ToDoListAngular project. Paste in the URL from the previous step. 
       ![Alt text](/Images/Part2/14.png?raw=true "Connecting your local front end project to the Azure API Service")
 22. Run the front end as Startup. It should look like this and be connected to the Azure API Service.
       ![Alt text](/Images/Part2/18.png?raw=true "Connecting your local front end project to the Azure API Service")
@@ -121,17 +121,15 @@ Software used in tutorial:
 # [Part 3]: Setup a VSTS Account, Multiple Environments, and Continuous Integration
 1. Create a VSTS account by hitting Sign In on the top right of the page at this URL: https://www.visualstudio.com/team-services/
 2. Create a new VSTS Account by hitting the button on the top right. 
-[image]
+      ![Alt text](/Images/Part3/00.png?raw=true)
 3. Pick a name for your account, hit Continue, and make the account.  
-[image]
-4. Create a 2 new Projects using Git version control and Agile.  One should be called ToDoListAngular and the other ToDoListDataAPI.
-[image]
-5a. Split your ToDoListAngular and ToDoListDataAPI into two separate solutions with separate .sln files. 
-5b. Add the code for both solutions separately. Go to the root folder of the ToDoListAngular solution (should look like below), right click and select Git Bash. *Note if you pulled this down in as a zip file, go to the next step.  If you pulled it down using Git Bash originally, make Hidden Folders visible, then delelte the .git folder before continuing.*
-5c. Repeat 5b for the ToDoListDataAPI project.
-[image]
+      ![Alt text](/Images/Part3/01.png?raw=true)
+4. Create a new Project using Git version control and Agile called ToDoListAngular.
+      ![Alt text](/Images/Part3/02.png?raw=true)
+5. Add the code for ToDoListAngular. Go to the root folder of the ToDoListAngular solution (should look like below), right click and select Git Bash. *Note if you pulled this down in as a zip file, go to the next step.  If you pulled it down using Git Bash originally, make Hidden Folders visible, then delelte the .git folder before continuing.*
+      ![Alt text](/Images/Part3/03.png?raw=true)
 Also get the URL of your Project by going to the Code tab:
-[image]
+      ![Alt text](/Images/Part3/03b.png?raw=true)
 6. Run the following commands in order, one by one. Make sure on the 4th command you change the URL to your project URL. 
       ```
       git init
@@ -141,23 +139,23 @@ Also get the URL of your Project by going to the Code tab:
       git push -u origin --all
       ```
 
-7. Go to VSTS and refresh, you should see your code there for both projects:
-[image]
-8. Under the Code tab for each of your two Solutions, click on the Branches sub-tab. Click on New Branch. Create a Dev, QA, and Prod branch all based off master branch. Right click on your old master branch, and delete it.
-[image]
-[image]
-9.  ???
+7. Go to VSTS and refresh, you should see your code there:
+      ![Alt text](/Images/Part3/04.png?raw=true)
+8.  Repeat steps 4-7 for the ToDoListDataAPI project. 
+9.  Under the Code tab for each of your two Solutions, click on the Branches sub-tab. Click on New Branch. Create a Dev, QA, and Prod branch all based off master branch. Right click on your old master branch, and delete it.
+      ![Alt text](/Images/Part3/05.png?raw=true)
+      ![Alt text](/Images/Part3/06.png?raw=true)
 10. Right click on Prod, and select Branch Security.  You can assign groups to manage your branches.  I recommend giving a DevOps team and the architects/senior lead devs the Prod rights to allow merges into it.  I recommend that QA have rights over their branch so that they can choose when they are ready to recieve new changes, and that the developers let QA know when they are done with a solid build and the build #.  Optionally, the DevOps team can manage the QA branch also.  Dev branch should be free for all the developers on the team to run the CI/CD process on their own.  We will not choose any of these options for now as this project includes only you, but please be aware of it in an enterprise setting. 
-[image]
+      ![Alt text](/Images/Part3/07.png?raw=true)
 11. Right click on Prod, and select Policies.  Check the box for Protect this Branch to see all the options.  This will allow you to have required pull requests, a certain number of reviewers, build validation, automatically include some reviewers, and other settings.  Please review the options here.  We will not choose any of these options for now as this project includes only you, but please be aware of it in an enterprise setting. Navigate away from this page by clicking Build & Release and do not save anything. 
-[image]
+      ![Alt text](/Images/Part3/08.png?raw=true)
 12. On the Build and Release tab, click "+ New" 
-[image]
+      ![Alt text](/Images/Part3/09.png?raw=true)
 13. Choose the Azure Web App template and hit Apply. 
-[image]
+      ![Alt text](/Images/Part3/10.png?raw=true)
 14. On the next landing page,  
-[image 11]
-[image 11b]
+      ![Alt text](/Images/Part3/11.png?raw=true)
+      ![Alt text](/Images/Part3/11b.png?raw=true)
 
 Go to the Build tab.
 Create a new Build.
