@@ -165,7 +165,23 @@ You have now setup the Dev build.
 Go to the QA environment. Repeat the process for this enviroment and Prod. 
 
 # [Part 4]: Setup VSTS Continuous Deployment, Test Multiple Environments end to end
-1. Go to the Releases tab
-Hit Create a new release
+1. First, go to the Azure Portal and upgrade your two deployments to Standard or Premium in order to get slots.  Standard is cheaper and will work perfectly fine, as it has 5 slots.  
+2. Create slots for Dev, QA, and Staging in both of your App Services. 
+3. Go to the Releases tab in VSTS
+4. Hit Create a new release
+5. Create a Release definition for Dev
+6. Add an artifact that connects to your Dev build. 
+7. Add a Dev environment. 
+8. Click the Tasks tab to edit the tasks under the Dev environment. 
+9. On the first task, -- and add dev as the slot. 
+10. Delete the second task. 
+11. Save the task.
+12. Run the release.
+13. Go back to the Azure Portal. Click on the dev slot. Get to the Overview page and find the URL for it. Click on the URL and ensure that it was deployed successfully. 
+14. Repeat steps 3-13 for the QA environment, but for the QA build and release. 
+15. Repeat steps 3-9 for the Staging environment, then continue to the next step. 
+16. For Staging, click on the second task and we will want to make sure the box is checked to swap with the Production enviroment. 
 
-*Research requiring approval for QA/Prod builds to go through
+
+*Research tags
+research web config for different environments in build
