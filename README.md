@@ -158,21 +158,29 @@ Also get the URL of your Project by going to the Code tab:
       ![Alt text](/Images/Part3/12.png?raw=true)
 16. Click Save and Queue. You have now setup the Dev build. 
       ![Alt text](/Images/Part3/13.png?raw=true)
-17. Repeat steps 12-16 for QA and Prod, make sure you associate the name of the build and the trigger with the correct branch name (QA and Prod). At the end your Build overview tab should look like this:
-      ![Alt text](/Images/Part3/14.png?raw=true)
+17. Repeat steps 12-16 for QA and Prod, make sure you associate the name of the build and the trigger with the correct branch name (QA and Prod). At the end your Build "All Definitions" tab should look like this:
+      ![Alt text](/Images/Part3/15.png?raw=true)
+18. Now, repeat steps 12-17 for the ToDoListDataAPI project. Switch projects by clicking top left name of project as in screenshot: 
+      ![Alt text](/Images/Part3/16.png?raw=true)
+19. Your ToDoListDataAPI project Builds should look like this:
+
 
 # [Part 4]: Setup Dev, QA, and Staging/Prod environments for all tiers
 1. First, go to the Azure Portal and upgrade your two deployments to Standard or Premium in order to get slots.  Standard is cheaper and will work perfectly fine, as it has 5 slots.  Choose S1 for the purposes of this tutorial. 
+
 2. Create slots for Dev, QA, and Staging in both of your App Services. 
 3. Go to your database.  Click Copy and create a Dev and QA version, make sure you choose basic as the size. The existing one will be prod.  
 4. Login to SSMS for Dev and QA and add a Todo item for each that tells which environment you are currently in. 
+5. In VSTS, for the ToDoListAngular QA and Prod branch change the web.config file to the ToDoListDataAPI URLs for the correct enviroinment....
+5. In VSTS, for the ToDoListDataAPI QA and Prod branch change the web.config file to match the Azure DB connection strings....
+
 
 # [Part 5]: Setup VSTS Continuous Deployment & Test Multiple Environments end to end
 1. Go to the Releases tab in VSTS and hit Create a new release
 2. Create a Release definition for Dev
 3. Add an artifact that connects to your Dev build. 
 4. Add a Dev environment. 
-5. Click on Variables. ??? We will add in the web.config name and the URL for the correct environment. If this is the Angular App then add the web config value for ... If this is the API App then add in the SQL Database environment.. 
+5. Click on Variables.  We will not do anything here but I want to display what could be done here.  Variables here will be matched to their web.config name and the keys here will replace keys in the web.config file.  You can use this to replace environment connections during the build process if you wanted to have 1 Dev build push to QA then Prod and change the connection strings along the way. It depends on how you want to build your CI/CD process.  
 6. Click the Tasks tab to edit the tasks under the Dev environment. 
 7. On the first task, -- and add dev as the slot. 
 8. Delete the second task. 
