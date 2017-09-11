@@ -163,13 +163,18 @@ Also get the URL of your Project by going to the Code tab:
 18. Now, repeat steps 12-17 for the ToDoListDataAPI project. Switch projects by clicking top left name of project as in screenshot: 
       ![Alt text](/Images/Part3/16.png?raw=true)
 19. Your ToDoListDataAPI project Builds should look like this:
-
+      ![Alt text](/Images/Part3/17.png?raw=true)
 
 # [Part 4]: Setup Dev, QA, and Staging/Prod environments for all tiers
-1. First, go to the Azure Portal and upgrade your two deployments to Standard or Premium in order to get slots.  Standard is cheaper and will work perfectly fine, as it has 5 slots.  Choose S1 for the purposes of this tutorial. 
-
+1. First, go to the Azure Portal.  Go to the ToDoListAngular Web App, click on Scale up (App Service Plan), then choose S1 Standard.  (Standard is cheaper and will work perfectly fine, as it has 5 slots.  Choose S1 for the purposes of this tutorial.)
+      ![Alt text](/Images/Part4/01.png?raw=true)
 2. Create slots for Dev, QA, and Staging in both of your App Services. 
-3. Go to your database.  Click Copy and create a Dev and QA version, make sure you choose basic as the size. The existing one will be prod.  
+      ![Alt text](/Images/Part4/02.png?raw=true)
+      ![Alt text](/Images/Part4/02b.png?raw=true)
+3. Repeat steps 1-2 for you ToDoListDataAPI app. 
+3. Go to your database.  Click Copy and create a Dev and QA version, make sure you choose basic as the size. The existing one will be prod.  Make sure you choose the same server the original DB was one.  Keep the pricing tier as Basic so it is only $5 a month, this is the cheapest otpion. No elastic pool. 
+      ![Alt text](/Images/Part4/03.png?raw=true)
+      ![Alt text](/Images/Part4/03b.png?raw=true)
 4. Login to SSMS for Dev and QA and add a Todo item for each that tells which environment you are currently in. 
 5. In VSTS, for the ToDoListAngular QA and Prod branch change the web.config file to the ToDoListDataAPI URLs for the correct enviroinment....
 5. In VSTS, for the ToDoListDataAPI QA and Prod branch change the web.config file to match the Azure DB connection strings....
