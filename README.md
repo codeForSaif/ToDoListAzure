@@ -12,34 +12,33 @@ Software used in tutorial:
 * Sql Server Management Server 2016 (I am sure any reasonably current SSMS version is fine).
 * Git Bash
 * Azure subscription
+* Swagger
 * Visual Studio Team Services (VSTS) for CI/CD portion
 
 ### Overview of guide:
 **Part 1: Setup the Azure SQL Database**
-1. Setup an Azure SQL database using the Azure Portal.  
-2. Sign into the database using SQL Server Management Studio
-3. Create a table with an ID and Description
-4. Create 5 stored procedures
+
+*Setup an Azure SQL database using the Azure Portal.  Sign into the database using SQL Server Management Studio. Create a table with an ID and Description and create 5 stored procedures which are available in this repo.*
 
 **Part 2: Setup the C# Project**
-1. Pull down the GitHub project
-2. Make sure it builds locally
-3. Test the Azure project connects locally to the Azure SQL DB 
-4. Deploy the API project to Azure
-5. Test the Web App can connect to tne Azure Web API project you just deployed 
-6. Deploy the Web App
-7. You should have a working app! Test it out by hitting the web front end website and checking your SQL DB!
+
+*Pull down the GitHub project and make sure it builds locally. Test the Azure project connects locally to the Azure SQL DB and deploy the API project to Azure. Test the Web App can connect to tne Azure Web API project you just deployed. Deploy the Web App. You should have a working app! Test it out by hitting the web front end website and checking your SQL DB! You can stop at this point if you just want to see an Azure deployment and are not interested in CI/CD.* 
 
 **Part 3: Setup a VSTS Account, Multiple Environments, and Continuous Integration**
-1. Create a Visual Studio Team Services (VSTS) account. 
-2. Setup 3 environments: Dev, QA, and Prod
-3. Add code for all 3 environments
-4. Setup a Continuous Integration Build that triggers on check-in to the code source
 
-**Part 4: Setup VSTS Continuous Deployment, Test Multiple Environments end to end**
-1. Setup Continuous Deployment that will deploy to each respective environment once a Successful Continuous Integration Build has been completed
-2. Test checking into Dev and see the whole process publish a change to the Dev published website
-3. Merge Dev into QA and view the whole process change into the QA published website
+*Create a Visual Studio Team Services (VSTS) account. Setup 3 environments: Dev, QA, and Staging/Prod. Add code for all 3 environments. Setup a Continuous Integration Build that triggers on check-in to the code source.
+
+**Part 4: Setup Dev, QA, and Staging/Prod environments for all tiers**
+
+*Setup slots for Dev/QA/Staging/Prod in the Azure App Service.  Setup 3 DBs for each respective environment.*
+
+**Part 5: Setup VSTS Continuous Deployment, Test Multiple Environments end to end**
+
+*Setup Continuous Deployment that will deploy to each respective environment once a Successful Continuous Integration Build has been completed. Test checking into Dev and see the whole process publish a change to the Dev published website. Merge Dev into QA and view the whole process change into the QA published website.
+
+**Cleanup**
+
+*This will be an explanation of costs of each service and how to remove everything -or- how to remove most of the costs and keep everything running in one enviroment for $5 a month if you want to keep this example active in your Portal.*
 
 # [Part 1]: Setup the Azure SQL Database
 1. Go to the Azure Portal at portal.azure.com
@@ -164,23 +163,37 @@ Check the box so it will create a build with every check in.
 You have now setup the Dev build. 
 Go to the QA environment. Repeat the process for this enviroment and Prod. 
 
-# [Part 4]: Setup VSTS Continuous Deployment, Test Multiple Environments end to end
-1. First, go to the Azure Portal and upgrade your two deployments to Standard or Premium in order to get slots.  Standard is cheaper and will work perfectly fine, as it has 5 slots.  
+# [Part 4]: Setup Dev, QA, and Staging/Prod environments for all tiers
+1. First, go to the Azure Portal and upgrade your two deployments to Standard or Premium in order to get slots.  Standard is cheaper and will work perfectly fine, as it has 5 slots.  Choose S1 for the purposes of this tutorial. 
 2. Create slots for Dev, QA, and Staging in both of your App Services. 
-3. Go to the Releases tab in VSTS
-4. Hit Create a new release
-5. Create a Release definition for Dev
-6. Add an artifact that connects to your Dev build. 
-7. Add a Dev environment. 
-8. Click the Tasks tab to edit the tasks under the Dev environment. 
-9. On the first task, -- and add dev as the slot. 
-10. Delete the second task. 
-11. Save the task.
-12. Run the release.
-13. Go back to the Azure Portal. Click on the dev slot. Get to the Overview page and find the URL for it. Click on the URL and ensure that it was deployed successfully. 
-14. Repeat steps 3-13 for the QA environment, but for the QA build and release. 
-15. Repeat steps 3-9 for the Staging environment, then continue to the next step. 
-16. For Staging, click on the second task and we will want to make sure the box is checked to swap with the Production enviroment. 
+3. Go to your database.  Click Copy and create a Dev and QA version, make sure you choose basic as the size. The existing one will be prod.  
+4. Login to SSMS for Dev and QA and add a Todo item for each that tells which environment you are currently in. 
+
+# [Part 5]: Setup VSTS Continuous Deployment & Test Multiple Environments end to end
+1. Go to the Releases tab in VSTS
+2. Hit Create a new release
+3. Create a Release definition for Dev
+4. Add an artifact that connects to your Dev build. 
+5. Add a Dev environment. 
+6. Click the Tasks tab to edit the tasks under the Dev environment. 
+7. On the first task, -- and add dev as the slot. 
+8. Delete the second task. 
+9. Save the task.
+10. Run the release.
+11. Go back to the Azure Portal. Click on the dev slot. Get to the Overview page and find the URL for it. Click on the URL and ensure that it was deployed successfully. 
+12. Repeat steps 1-11 for the QA environment, but for the QA build and release. 
+13. Repeat steps 1-7 for the Staging environment, then continue to the next step. 
+14. For Staging, click on the second task and we will want to make sure the box is checked to swap with the Production enviroment. 
+
+# [Cleanup]: Removing partial or all resources / saving costs
+Current costs of operation for this tutorial ~$95 per month:
+Each Basic DB costs $5 per month, you have three. 
+S1 App Services cost $40 per month each, you have two.  
+VSTS is free with your "MSDN"/"My Visual Studio" subscription. 
+
+You have two options: 
+1. Remove all associated resource groups to delete everything = $0. 
+2. If you want to keep most of the process intact in one environment: downgrade your two Azure App Services back to Free (which will remove your slots for Dev/QA/staging), and remove the Dev and QA versions of the DB. You will now just have the production slot to experiement with for a total cost of $5 per month of Azure credits =). Note your VSTS extra environments will no longer work, you can only use the Prod Build and Release process now. 
 
 
 *Research tags
