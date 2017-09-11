@@ -148,20 +148,18 @@ Also get the URL of your Project by going to the Code tab:
       ![Alt text](/Images/Part3/07.png?raw=true)
 11. Right click on Prod, and select Policies.  Check the box for Protect this Branch to see all the options.  This will allow you to have required pull requests, a certain number of reviewers, build validation, automatically include some reviewers, and other settings.  Please review the options here.  We will not choose any of these options for now as this project includes only you, but please be aware of it in an enterprise setting. Navigate away from this page by clicking Build & Release and do not save anything. 
       ![Alt text](/Images/Part3/08.png?raw=true)
-12. On the Build and Release tab, click "+ New" 
+12. On the Build and Release tab, selet Build, then click "+ New" 
       ![Alt text](/Images/Part3/09.png?raw=true)
 13. Choose the Azure Web App template and hit Apply. 
       ![Alt text](/Images/Part3/10.png?raw=true)
-14. On the next landing page,  
-      ![Alt text](/Images/Part3/11.png?raw=true)
-      ![Alt text](/Images/Part3/11b.png?raw=true)
-
-Go to the Build tab.
-Create a new Build.
-Click on the Triggers tab.
-Check the box so it will create a build with every check in.
-You have now setup the Dev build. 
-Go to the QA environment. Repeat the process for this enviroment and Prod. 
+14. On the next landing page, add a name for it as ToDoListAngular-Dev-CI.  Choose Hosted.  Add the .sln file by clicking the 3 dots and finding it. When you get to Azure Subscription, choose it from the dropdown, then hit Authorize.  Wait a minute, and it will populate the App Services you have. Choose the corresponding App Service. 
+      ![Alt text](/Images/Part3/11a.png?raw=true)
+15. Click on the Triggers tab. Check the slider to Enabled.  Choose to Include Develop, make sure it is the right branch. 
+      ![Alt text](/Images/Part3/12.png?raw=true)
+16. Click Save and Queue. You have now setup the Dev build. 
+      ![Alt text](/Images/Part3/13.png?raw=true)
+17. Repeat steps 12-16 for QA and Prod, make sure you associate the name of the build and the trigger with the correct branch name (QA and Prod). At the end your Build overview tab should look like this:
+      ![Alt text](/Images/Part3/14.png?raw=true)
 
 # [Part 4]: Setup Dev, QA, and Staging/Prod environments for all tiers
 1. First, go to the Azure Portal and upgrade your two deployments to Standard or Premium in order to get slots.  Standard is cheaper and will work perfectly fine, as it has 5 slots.  Choose S1 for the purposes of this tutorial. 
@@ -170,11 +168,11 @@ Go to the QA environment. Repeat the process for this enviroment and Prod.
 4. Login to SSMS for Dev and QA and add a Todo item for each that tells which environment you are currently in. 
 
 # [Part 5]: Setup VSTS Continuous Deployment & Test Multiple Environments end to end
-1. Go to the Releases tab in VSTS
-2. Hit Create a new release
-3. Create a Release definition for Dev
-4. Add an artifact that connects to your Dev build. 
-5. Add a Dev environment. 
+1. Go to the Releases tab in VSTS and hit Create a new release
+2. Create a Release definition for Dev
+3. Add an artifact that connects to your Dev build. 
+4. Add a Dev environment. 
+5. Click on Variables. ??? We will add in the web.config name and the URL for the correct environment. If this is the Angular App then add the web config value for ... If this is the API App then add in the SQL Database environment.. 
 6. Click the Tasks tab to edit the tasks under the Dev environment. 
 7. On the first task, -- and add dev as the slot. 
 8. Delete the second task. 
