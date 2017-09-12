@@ -236,13 +236,13 @@ Also get the URL of your Project by going to the Code tab:
        ![Alt text](/Images/Part5/17b.png?raw=true)      
 17. Check the URL for Dev, get the URL from the Portal if you did not save it (see first screenshot).   
        ![Alt text](/Images/Part5/18.png?raw=true)
-18. Your dev page should have your text added:
+18. Your dev page should have your text added.  Also go to the ToDo list page and add some data to it. Refresh to ensure it saved. You can check in SSMS to ensure it saved correctly in the dev DB. 
        ![Alt text](/Images/Part5/19.png?raw=true)
 20. Let's test out deploying to Staging and swapping it to Prod.  Make a change in VSTS to your ToDoListAngular in the production code.  Go into the following directories: ToDoListAngular > ToDoListAngular > app > views > Home.html (highlighted in screenshot).  Click Edit.  Change the words in the paragraph tag like adding "We are testing in Production ;)." in there. (You could also go to VS and check in code to this branch but this is quicker for the purposes of the lab. Also you don't have this branch pulled down locally so you would need to do that first).
        ![Alt text](/Images/Part5/20.png?raw=true)
 19. Click on Build and Release > Releases. You should see a Build succeed.
 20. Click on Build and Release > Releases. You should see a Release succeed.
-21. Check the URL for Staging (go to the portal and overview and click on the URL):
+21. Check the URL for Staging (go to the portal and overview and click on the URL).  Also go to the ToDo list page and add some data to it. Refresh to ensure it saved. You can check in SSMS to ensure it saved correctly in the staging DB optionally. 
        ![Alt text](/Images/Part5/21.png?raw=true)
 22. Your Staging app page should look like this:
        ![Alt text](/Images/Part5/22.png?raw=true)
@@ -252,7 +252,7 @@ Also get the URL of your Project by going to the Code tab:
        ![Alt text](/Images/Part5/24.png?raw=true)
 25. Choose your source as the production slot and the destination as staging. Hit OK at the bottom.   Give it 2-3 mins to swap. Note the swap is seamless for the users, they will not notice downtime. You will get a notification in Azure when the swap has been completed successfully on the top right of the Portal. 
        ![Alt text](/Images/Part5/25.png?raw=true)
-26. Check your production app page again, and it should have the text now. *You may need an incognito window or to clear your cache to see the change.*
+26. Check your production app page again, and it should have the text now. *You may need an incognito window or to clear your cache to see the change.*  Also go to the ToDo list page and check that the data you added to Staging is not visible here. 
        ![Alt text](/Images/Part5/26.png?raw=true)
 27. Verify that your connection strings are still correct and going to the production API. We are ensuring the web config settings did not get swapped with the application. You don't want your production environment going to your staging DB!!! Click on Application Settings in your production CatToDoListAngular. 
        ![Alt text](/Images/Part5/27.png?raw=true)
