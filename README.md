@@ -176,25 +176,54 @@ Also get the URL of your Project by going to the Code tab:
       ![Alt text](/Images/Part4/03.png?raw=true)
       ![Alt text](/Images/Part4/03b.png?raw=true)
 4. Login to SSMS for Dev and QA and add a Todo item for each that tells which environment you are currently in. 
-5. In VSTS, for the ToDoListAngular QA and Prod branch change the web.config file to the ToDoListDataAPI URLs for the correct enviroinment....
-5. In VSTS, for the ToDoListDataAPI QA and Prod branch change the web.config file to match the Azure DB connection strings....
-
+5. Go to the Azure Portal and click all Resources as seen in first screenshot below.  Click on each staging slot for ToDoListDataAPI which should be Dev and QA and record the URL from the overview page. You will need these URLs for step 7.
+      ![Alt text](/Images/Part4/07.png?raw=true)
+      ![Alt text](/Images/Part4/07a.png?raw=true)
+6. Go to the Azure Portal and click all Resources as seen in first screenshot below.  Click on each SQL DB environment instance: dev and QA. Click on Show connection strings.  Fill in the username and password of the connection string before recording it. You do not need prod as this one is already setup in the prod code environment. You will need these URLs for step 9.
+      ![Alt text](/Images/Part4/08.png?raw=true)
+      ![Alt text](/Images/Part4/08b.png?raw=true)
+      ![Alt text](/Images/Part4/08c.png?raw=true)
+7. In VSTS, for the ToDoListAngular QA branch change the web.config file to the ToDoListDataAPI URLs for the correct enviroinment. Click on the Code tab. Click into the ToDoListAngular folder, then click on the web.config file. Click Edit on the top right of the file. Change the connection string to the toDoListAPIURL to the correct environment URL. Change to the Dev branch by clicking where the left arrow is pointed. Change the Dev connection string.
+      ![Alt text](/Images/Part4/05.png?raw=true)
+8. Switch projects to the ToDoListDataAPI project by clicking on the top left:
+      ![Alt text](/Images/Part4/06.png?raw=true)
+9.  In VSTS, for the ToDoListDataAPI QA branch change the web.config file to the ToDoListDataAPI URLs for the correct Azure DB connection String. Click on the Code tab. Click into the ToDoListAngular folder, then click on the web.config file. Click Edit on the top right of the file. Change the connection string to the toDoListAPIURL to the correct environment URL. Change to the Dev branch by clicking where the left arrow is pointed. Change the Dev connection string.
+      ![Alt text](/Images/Part4/04.png?raw=true)
 
 # [Part 5]: Setup VSTS Continuous Deployment & Test Multiple Environments end to end
-1. Go to the Releases tab in VSTS and hit Create a new release
-2. Create a Release definition for Dev
-3. Add an artifact that connects to your Dev build. 
-4. Add a Dev environment. 
-5. Click on Variables.  We will not do anything here but I want to display what could be done here.  Variables here will be matched to their web.config name and the keys here will replace keys in the web.config file.  You can use this to replace environment connections during the build process if you wanted to have 1 Dev build push to QA then Prod and change the connection strings along the way. It depends on how you want to build your CI/CD process.  
-6. Click the Tasks tab to edit the tasks under the Dev environment. 
-7. On the first task, -- and add dev as the slot. 
-8. Delete the second task. 
-9. Save the task.
-10. Run the release.
-11. Go back to the Azure Portal. Click on the dev slot. Get to the Overview page and find the URL for it. Click on the URL and ensure that it was deployed successfully. 
-12. Repeat steps 1-11 for the QA environment, but for the QA build and release. 
-13. Repeat steps 1-7 for the Staging environment, then continue to the next step. 
-14. For Staging, click on the second task and we will want to make sure the box is checked to swap with the Production enviroment. 
+1. Go to the Releases tab in VSTS for the ToDoListDataAPI project and hit Create a new release
+      ![Alt text](/Images/Part5/01.png?raw=true)
+2. Choose the Azure App Service Deployment template. For the environment name, put Develop. Click on Policies, you can set these in the future when you add a manual approver. You can hit the "X" button to close the right slideout menu and continue setting up the Release Definition. 
+      ![Alt text](/Images/Part5/02.png?raw=true)
+      ![Alt text](/Images/Part5/02b.png?raw=true)
+3. Click the pencil icon and change the name to "ToDoListDataAPI-CD-Dev".
+      ![Alt text](/Images/Part5/03.png?raw=true)
+4. Add an artifact that connects to your Dev build.  Choose your Dev CI build, it will add extra settings, leave these at default, then click Add. 
+      ![Alt text](/Images/Part5/04.png?raw=true)
+       ![Alt text](/Images/Part5/05.png?raw=true)
+5. Click the Tasks tab to edit the tasks under the Dev environment. 
+       ![Alt text](/Images/Part5/06.png?raw=true)
+6. On the Dev Development Process (where you land) add your subscription and app service name. 
+       ![Alt text](/Images/Part5/07.png?raw=true)
+7. Click on the Deploy Azure App Service task.  Check the box for Deploy to slot. Add the resource group and the slot.  The slot for the dev one should be dev. All other settings on this task should remain at default. 
+       ![Alt text](/Images/Part5/08.png?raw=true)
+8. Click back to the Pipeline. Click the lightning icon on the artifact for the CD trigger. Click to enable it. Choose the build branch to be develop to match the CD environment. 
+       ![Alt text](/Images/Part5/12.png?raw=true)
+9. Click on Variables.  We will not do anything here but I want to display what could be done here.  Variables here will be matched to their web.config name and the keys here will replace keys in the web.config file.  You can use this to replace environment connections during the build process if you wanted to have 1 Dev build push to QA then Prod and change the connection strings along the way. It depends on how you want to build your CI/CD process.  
+       ![Alt text](/Images/Part5/10.png?raw=true)
+10. Save the Release definition. Just hit OK with the modal that pops up. 
+       ![Alt text](/Images/Part5/09.png?raw=true)
+11. Repeat steps 1-10 for the QA and Staging environment, but for the QA or Staging build and release. 
+12. Swap to the ToDoListAngular project. 
+13. Repeat steps 1-11 for the ToDoListAngular project to setup Dev/QA/Staging environments. 
+14. Let's test out deploying.  Make a change in VSTS to your ToDoListAngular in the dev environment. 
+15. You should see a Build succeed.
+16. You should see a Release succeed.
+17. Check the URL for Dev: 
+18. Let's test out deploying.  Make a change in VSTS to your ToDoListDataAPI in the production/staging environment. 
+19. You should see a Build succeed.
+20. You should see a Release succeed.
+21. Check the URL for Dev: 
 
 # [Cleanup]: Removing partial or all resources / saving costs
 Current costs of operation for this tutorial ~$95 per month:
@@ -209,3 +238,4 @@ You have two options:
 
 *Research tags
 research web config for different environments in build
+research adding approvers
