@@ -125,7 +125,7 @@ Software used in tutorial:
       ![Alt text](/Images/Part3/01.png?raw=true)
 4. Create a new Project using Git version control and Agile called ToDoListAngular.
       ![Alt text](/Images/Part3/02.png?raw=true)
-5. Add the code for ToDoListAngular. Go to the root folder of the ToDoListAngular solution (should look like below), right click and select Git Bash. *Note if you pulled this down in as a zip file, go to the next step.  If you pulled it down using Git Bash originally, make Hidden Folders visible, then delelte the .git folder before continuing.*
+5. Add the code for ToDoListAngular. Go to the root folder of the ToDoListAngular solution (should look like below), right click and select Git Bash. *Note if you pulled this down in as a zip file, go to the next step.  If you pulled it down using Git Bash originally, make Hidden Folders visible, then delete the .git folder before continuing.*
       ![Alt text](/Images/Part3/03.png?raw=true)
 Also get the URL of your Project by going to the Code tab:
       ![Alt text](/Images/Part3/03b.png?raw=true)
@@ -172,14 +172,14 @@ Also get the URL of your Project by going to the Code tab:
       ![Alt text](/Images/Part4/02.png?raw=true)
       ![Alt text](/Images/Part4/02b.png?raw=true)
 3. Repeat steps 1-2 for you ToDoListDataAPI app. 
-3. Go to your database.  Click Copy and create a Dev and QA version, make sure you choose basic as the size. The existing one will be prod.  Make sure you choose the same server the original DB was one.  Keep the pricing tier as Basic so it is only $5 a month, this is the cheapest otpion. No elastic pool. 
+3. Go to your database.  Click Copy and create a Dev, QA, and Staging version, make sure you choose basic as the size. The existing one will be prod.  Make sure you choose the same server the original DB was one.  Keep the pricing tier as Basic so it is only $5 a month, this is the cheapest option. No elastic pool. 
       ![Alt text](/Images/Part4/03.png?raw=true)
       ![Alt text](/Images/Part4/03b.png?raw=true)
 4. Login to SSMS for Dev and QA and add a Todo item for each that tells which environment you are currently in. 
 5. Go to the Azure Portal and click all Resources as seen in first screenshot below.  Click on each staging slot for ToDoListDataAPI which should be Dev and QA and record the URL from the overview page. You will need these URLs for step 7.
       ![Alt text](/Images/Part4/07.png?raw=true)
       ![Alt text](/Images/Part4/07a.png?raw=true)
-6. Go to the Azure Portal and click all Resources as seen in first screenshot below.  Click on each SQL DB environment instance: dev and QA. Click on Show connection strings.  Fill in the username and password of the connection string before recording it. You do not need prod as this one is already setup in the prod code environment. You will need these URLs for step 9.
+6. Go to the Azure Portal and click all Resources as seen in first screenshot below.  Click on each SQL DB environment instance: Dev, QA, and Staging. Click on Show connection strings.  Fill in the username and password of the connection string before recording it. You do not need prod as this one is already setup in the prod code environment. You will need the Dev and QA connection strings for step 9 and the Staging and Production connection strings for step 10.
       ![Alt text](/Images/Part4/08.png?raw=true)
       ![Alt text](/Images/Part4/08b.png?raw=true)
       ![Alt text](/Images/Part4/08c.png?raw=true)
@@ -189,6 +189,14 @@ Also get the URL of your Project by going to the Code tab:
       ![Alt text](/Images/Part4/06.png?raw=true)
 9.  In VSTS, for the ToDoListDataAPI QA branch change the web.config file to the ToDoListDataAPI URLs for the correct Azure DB connection String. Click on the Code tab. Click into the ToDoListAngular folder, then click on the web.config file. Click Edit on the top right of the file. Change the connection string to the toDoListAPIURL to the correct environment URL. Change to the Dev branch by clicking where the left arrow is pointed. Change the Dev connection string.
       ![Alt text](/Images/Part4/04.png?raw=true)
+10. In the Azure Portal click on the ToDoListDataAPI staging app service.  Click on Application Settings.  Add the following Key to the App Settings plus the Staging DB Connection String.  Check the box next to the Key you just added for Slot Setting. Hit Save at the top.
+      ![Alt text](/Images/Part4/09.png?raw=true)
+11. Go to the ToDoListDataAPI app service (main production one).  Click on Application Settings.  Add the following Key to the App Settings plus the Staging DB Connection String.  Check the box next to the Key you just added for Slot Setting. Hit Save at the top.  Now, if you Swap Production and Staging the connection strings will still be correct. *Note you should keep Production and Staging DBs idential.  Also note, you added the connection strings to the code manually for Dev and QA because you will need them in the code base to work with locally.* 
+      ![Alt text](/Images/Part4/10.png?raw=true)
+12. Go to the ToDoListAngular staging app service in the Portal.  Add the following Key to the App Settings plus the Staging URL.  Check the box next to the Key you just added for Slot Setting. Hit Save at the top.
+      ![Alt text](/Images/Part4/11.png?raw=true)
+13. Go to the ToDoListAngular app service (main production one) in the Portal.  Add the following Key to the App Settings plus the Production URL.  Check the box next to the Key you just added for Slot Setting. Hit Save at the top.
+      ![Alt text](/Images/Part4/12.png?raw=true)
 
 # [Part 5]: Setup VSTS Continuous Deployment & Test Multiple Environments end to end
 1. Go to the Releases tab in VSTS for the ToDoListDataAPI project and hit Create a new release
@@ -215,19 +223,45 @@ Also get the URL of your Project by going to the Code tab:
        ![Alt text](/Images/Part5/09.png?raw=true)
 11. Repeat steps 1-10 for the QA and Staging environment, but for the QA or Staging build and release. 
 12. Swap to the ToDoListAngular project. 
+       ![Alt text](/Images/Part5/14.png?raw=true)
 13. Repeat steps 1-11 for the ToDoListAngular project to setup Dev/QA/Staging environments. 
-14. Let's test out deploying.  Make a change in VSTS to your ToDoListAngular in the dev environment. 
-15. You should see a Build succeed.
-16. You should see a Release succeed.
-17. Check the URL for Dev: 
-18. Let's test out deploying.  Make a change in VSTS to your ToDoListDataAPI in the production/staging environment. 
-19. You should see a Build succeed.
-20. You should see a Release succeed.
-21. Check the URL for Dev: 
-
+14. Let's test out deploying the Dev environment.  Make a change in VSTS to your ToDoListAngular code in the dev environment. Go into the following directories: ToDoListAngular > ToDoListAngular > app > views > Home.html (highlighted in screenshot).  Click Edit.  Change the words in the paragraph tag like adding "Hello Dev world" in there. Then see the 2nd screenshot, hit Commit. Hit commit when the modal pops up and don't change anything. (You could also go to VS and check in code to this branch but this is quicker for the purposes of the lab).
+       ![Alt text](/Images/Part5/15.png?raw=true)
+       ![Alt text](/Images/Part5/15b.png?raw=true)
+15. Click on Build and Release > Builds.  You should see a Build in progress.  Click on the highlighted text with the # sign and date on it. You will see the progress of it, then it should show Succeeded at the end (2nd screenshot).
+       ![Alt text](/Images/Part5/16.png?raw=true)
+       ![Alt text](/Images/Part5/16b.png?raw=true)      
+16. Click on Build and Release > Releases.  You should see a release in progress (has the blue icon with the play button).  Double click on the Release name which is highlighted in purple. You should see a Release succeed. You can hit Logs (where the arrow is in the 2nd screenshot) to see progress if it is still running or if you need to debug anything. 
+       ![Alt text](/Images/Part5/17.png?raw=true)
+       ![Alt text](/Images/Part5/17b.png?raw=true)      
+17. Check the URL for Dev, get the URL from the Portal if you did not save it (see first screenshot).   
+       ![Alt text](/Images/Part5/18.png?raw=true)
+18. Your dev page should have your text added:
+       ![Alt text](/Images/Part5/19.png?raw=true)
+20. Let's test out deploying to Staging and swapping it to Prod.  Make a change in VSTS to your ToDoListAngular in the production code.  Go into the following directories: ToDoListAngular > ToDoListAngular > app > views > Home.html (highlighted in screenshot).  Click Edit.  Change the words in the paragraph tag like adding "We are testing in Production ;)." in there. (You could also go to VS and check in code to this branch but this is quicker for the purposes of the lab. Also you don't have this branch pulled down locally so you would need to do that first).
+       ![Alt text](/Images/Part5/20.png?raw=true)
+19. Click on Build and Release > Releases. You should see a Build succeed.
+20. Click on Build and Release > Releases. You should see a Release succeed.
+21. Check the URL for Staging (go to the portal and overview and click on the URL):
+       ![Alt text](/Images/Part5/21.png?raw=true)
+22. Your Staging app page should look like this:
+       ![Alt text](/Images/Part5/22.png?raw=true)
+23. Check your production app page, it should be unchanged:
+       ![Alt text](/Images/Part5/23.png?raw=true)
+24. On your production app Overview, click on Swap.
+       ![Alt text](/Images/Part5/24.png?raw=true)
+25. Choose your source as the production slot and the destination as staging. Hit OK at the bottom.   Give it 2-3 mins to swap. Note the swap is seamless for the users, they will not notice downtime. You will get a notification in Azure when the swap has been completed successfully on the top right of the Portal. 
+       ![Alt text](/Images/Part5/25.png?raw=true)
+26. Check your production app page again, and it should have the text now. *You may need an incognito window or to clear your cache to see the change.*
+       ![Alt text](/Images/Part5/26.png?raw=true)
+27. Verify that your connection strings are still correct and going to the production API. We are ensuring the web config settings did not get swapped with the application. You don't want your production environment going to your staging DB!!! Click on Application Settings in your production CatToDoListAngular. 
+       ![Alt text](/Images/Part5/27.png?raw=true)
+28. Congratulations, you made it through the whole tutorial! You're done! :) 
+       ![Alt text](/Images/Part5/Congratulations.png?raw=true)
+       
 # [Cleanup]: Removing partial or all resources / saving costs
-Current costs of operation for this tutorial ~$95 per month:
-Each Basic DB costs $5 per month, you have three. 
+Current costs of operation for keeping this tutorial in Azure ~$100 (or credits) per month:
+Each Basic DB costs $5 per month, you have four. 
 S1 App Services cost $40 per month each, you have two.  
 VSTS is free with your "MSDN"/"My Visual Studio" subscription. 
 
