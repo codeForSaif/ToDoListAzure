@@ -215,8 +215,10 @@ Also get the URL of your Project by going to the Code tab:
        ![Alt text](/Images/Part5/07.png?raw=true)
 7. Click on the Deploy Azure App Service task.  Check the box for Deploy to slot. Add the resource group and the slot.  The slot for the dev one should be dev. All other settings on this task should remain at default. 
        ![Alt text](/Images/Part5/08.png?raw=true)
-8. Click back to the Pipeline. Click the lightning icon on the artifact for the CD trigger. Click to enable it. Choose the build branch to be develop to match the CD environment. 
+8. Click back to the Pipeline. Click the lightning icon on the artifact for the CD trigger to make it automatically deploy after a successful new build exists. Click to enable it. Choose the build branch to be develop to match the CD environment. 
        ![Alt text](/Images/Part5/12.png?raw=true)
+8b. Click on the icon to the right side of the Environment square.  This will allow you to specify individuals or an entire group to approve or reject the deployment. We will not do antyhing here, this is just for your reference.  You should not set this up for Dev.  However, in QA or Prod it could be helpful for you to have a team of approvers who can "push the button" when they are ready to receive the QA or Prod deployment. 
+        ![Alt text](/Images/Part5/28.png?raw=true)
 9. Click on Variables.  We will not do anything here but I want to display what could be done here.  Variables here will be matched to their web.config name and the keys here will replace keys in the web.config file.  You can use this to replace environment connections during the build process if you wanted to have 1 Dev build push to QA then Prod and change the connection strings along the way. It depends on how you want to build your CI/CD process.  
        ![Alt text](/Images/Part5/10.png?raw=true)
 10. Save the Release definition. Just hit OK with the modal that pops up. 
