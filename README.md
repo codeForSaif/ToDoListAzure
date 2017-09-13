@@ -1,7 +1,5 @@
 # ToDoListAzure
-This is a simple proof of concept to display an Azure App Service website communciating with an API project, which communicates to an Azure SQL backend.  The app is a To-Do application based on Microsoft's To-Do List app, but adapted for Azure deploy and to Visual Studio 2017 Preview.  The project is C#, Angular JS, and SQL. 
-
-The primary objective of the tutorial is to show you how to deploy an Azure App Service Website + App Service API + Azure SQL and how to get it all working with a simple To-Do application. Also I am reviving the older post to update the project to Visual Studio 2017.  
+This is a simple proof of concept to display an Azure App Service website communicating with an API project, which communicates to an Azure SQL backend.  The app is a To-Do application based on Microsoft's To-Do List app, but adapted for Azure deploy and to Visual Studio 2017 Preview.  The project is C#, Angular JS, and SQL. The primary objective of the tutorial is to show you how to deploy an Azure App Service Website + App Service API + Azure SQL and how to get it all working with a simple To-Do application. 
 
 **Timing: If you are a senior dev who knows Azure and VSTS very well I think you could complete this whole setup in 2-3 hours. If you are a senior dev new to Azure and VSTS I think it could be ~4-6 hours to complete.**
 
@@ -11,7 +9,7 @@ The code is based on this tutorial here: https://docs.microsoft.com/en-us/azure/
 
 Software used in tutorial:
 * Visual Studio 2017 Preview (I am sure any version of VS2017 is fine).
-* Sql Server Management Server 2016 (I am sure any reasonably current SSMS version is fine).
+* SQL Server Management Server 2016 (I am sure any reasonably current SSMS version is fine).
 * Git Bash
 * Azure subscription
 * Swagger
@@ -24,7 +22,7 @@ Software used in tutorial:
 
 **Part 2: Setup the C# Project**
 
-*Pull down the GitHub project and make sure it builds locally. Test the Azure project connects locally to the Azure SQL DB and deploy the API project to Azure. Test the Web App can connect to tne Azure Web API project you just deployed. Deploy the Web App. You should have a working app! Test it out by hitting the web front end website and checking your SQL DB! You can stop at this point if you just want to see an Azure deployment and are not interested in CI/CD.* 
+*Pull down the GitHub project and make sure it builds locally. Test the Azure project connects locally to the Azure SQL DB and deploy the API project to Azure. Test the Web App can connect to the Azure Web API project you just deployed. Deploy the Web App. You should have a working app! Test it out by hitting the web front end website and checking your SQL DB! You can stop at this point if you just want to see an Azure deployment and are not interested in CI/CD.* 
 
 **Part 3: Setup a VSTS Account, Multiple Environments, and Continuous Integration**
 
@@ -40,7 +38,7 @@ Software used in tutorial:
 
 **Cleanup**
 
-*This will be an explanation of costs of each service and how to remove everything -or- how to remove most of the costs and keep everything running in one enviroment for $5 a month if you want to keep this example active in your Portal.*
+*This will be an explanation of costs of each service and how to remove everything -or- how to remove most of the costs and keep everything running in one environment for $5 a month if you want to keep this example active in your Portal.*
 
 # [Part 1]: Setup the Azure SQL Database
 1. Go to the Azure Portal at portal.azure.com
@@ -96,7 +94,7 @@ Software used in tutorial:
 14. Your SSMS table should look like this now:
       ![Alt text](/Images/Part2/07.png?raw=true "SSMS Table Updated")
 15. You have now tested all of the APIs and seen that your API project is linked to your Azure SQL DB. 
-16. Let's publish the API project, stop running it.  Right click on the API project adn choose Publish.
+16. Let's publish the API project, stop running it.  Right click on the API project and choose Publish.
       ![Alt text](/Images/Part2/08.png?raw=true "Publishing the API project")
 17. Choose an App Service.
       ![Alt text](/Images/Part2/09.png?raw=true "Publishing the API project")
@@ -146,11 +144,11 @@ Also get the URL of your Project by going to the Code tab:
 9.  Under the Code tab for each of your two Solutions, click on the Branches sub-tab. Click on New Branch. Create a Dev, QA, and Prod branch all based off master branch. Right click on your old master branch, and delete it.
       ![Alt text](/Images/Part3/05.png?raw=true)
       ![Alt text](/Images/Part3/06.png?raw=true)
-10. Right click on Prod, and select Branch Security.  You can assign groups to manage your branches.  I recommend giving a DevOps team and the architects/senior lead devs the Prod rights to allow merges into it.  I recommend that QA have rights over their branch so that they can choose when they are ready to recieve new changes, and that the developers let QA know when they are done with a solid build and the build #.  Optionally, the DevOps team can manage the QA branch also.  Dev branch should be free for all the developers on the team to run the CI/CD process on their own.  We will not choose any of these options for now as this project includes only you, but please be aware of it in an enterprise setting. 
+10. Right click on Prod, and select Branch Security.  You can assign groups to manage your branches.  I recommend giving a DevOps team and the architects/senior lead devs the Prod rights to allow merges into it.  I recommend that QA have rights over their branch so that they can choose when they are ready to receive new changes, and that the developers let QA know when they are done with a solid build and the build #.  Optionally, the DevOps team can manage the QA branch also.  Dev branch should be free for all the developers on the team to run the CI/CD process on their own.  We will not choose any of these options for now as this project includes only you, but please be aware of it in an enterprise setting. 
       ![Alt text](/Images/Part3/07.png?raw=true)
 11. Right click on Prod, and select Policies.  Check the box for Protect this Branch to see all the options.  This will allow you to have required pull requests, a certain number of reviewers, build validation, automatically include some reviewers, and other settings.  Please review the options here.  We will not choose any of these options for now as this project includes only you, but please be aware of it in an enterprise setting. Navigate away from this page by clicking Build & Release and do not save anything. 
       ![Alt text](/Images/Part3/08.png?raw=true)
-12. On the Build and Release tab, selet Build, then click "+ New" 
+12. On the Build and Release tab, select Build, then click "+ New" 
       ![Alt text](/Images/Part3/09.png?raw=true)
 13. Choose the Azure Web App template and hit Apply. 
       ![Alt text](/Images/Part3/10.png?raw=true)
@@ -185,7 +183,7 @@ Also get the URL of your Project by going to the Code tab:
       ![Alt text](/Images/Part4/08.png?raw=true)
       ![Alt text](/Images/Part4/08b.png?raw=true)
       ![Alt text](/Images/Part4/08c.png?raw=true)
-7. In VSTS, for the ToDoListAngular QA branch change the web.config file to the ToDoListDataAPI URLs for the correct enviroinment. Click on the Code tab. Click into the ToDoListAngular folder, then click on the web.config file. Click Edit on the top right of the file. Change the connection string to the toDoListAPIURL to the correct environment URL. Change to the Dev branch by clicking where the left arrow is pointed. Change the Dev connection string.
+7. In VSTS, for the ToDoListAngular QA branch change the web.config file to the ToDoListDataAPI URLs for the correct environment. Click on the Code tab. Click into the ToDoListAngular folder, then click on the web.config file. Click Edit on the top right of the file. Change the connection string to the toDoListAPIURL to the correct environment URL. Change to the Dev branch by clicking where the left arrow is pointed. Change the Dev connection string.
       ![Alt text](/Images/Part4/05.png?raw=true)
 8. Switch projects to the ToDoListDataAPI project by clicking on the top left:
       ![Alt text](/Images/Part4/06.png?raw=true)
@@ -260,7 +258,38 @@ Also get the URL of your Project by going to the Code tab:
        ![Alt text](/Images/Part5/27.png?raw=true)
 28. Congratulations, you made it through the whole tutorial! You're done! :) 
        ![Alt text](/Images/Part5/Congratulations.png?raw=true)
-       
+
+# ARM Template - Adding Slots
+Note, if you wanted to add Slots and the App Settings as "sticky" to stay with the slot you would need to generate the ARM template for the deployment and add the following into the ARM template for each slot.  You can see an explanation here: http://anthonychu.ca/post/azure-app-service-resource-templates-tips-tricks/ and at the bottom of the page there is a full GitHub JSON sample. 
+
+```
+"resources": [
+        {
+          "apiVersion": "2015-08-01",
+          "name": "appsettings",
+          "type": "config",
+          "dependsOn": [
+            "[resourceId('Microsoft.Web/Sites/Slots', variables('webSiteName'), 'Staging')]"
+          ],
+          "properties": {
+            "AppSettingKey1": "Some staging value",
+            "AppSettingKey2": "My second staging setting",
+            "AppSettingKey3": "My third staging setting"
+          },
+      {
+        "apiVersion": "2015-08-01",
+        "name": "slotconfignames",
+        "type": "config",
+        "dependsOn": [
+          "[resourceId('Microsoft.Web/Sites', variables('webSiteName'))]"
+        ],
+        "properties": {
+          "appSettingNames": [ "AppSettingKey1", "AppSettingKey2" ]
+        }
+      }
+    ]
+```
+
 # [Cleanup]: Removing partial or all resources / saving costs
 Current costs of operation for keeping this tutorial in Azure ~$100 (or credits) per month:
 Each Basic DB costs $5 per month, you have four. 
@@ -269,9 +298,6 @@ VSTS is free with your "MSDN"/"My Visual Studio" subscription.
 
 You have two options: 
 1. Remove all associated resource groups to delete everything = $0. 
-2. If you want to keep most of the process intact in one environment: downgrade your two Azure App Services back to Free (which will remove your slots for Dev/QA/staging), and remove the Dev and QA versions of the DB. You will now just have the production slot to experiement with for a total cost of $5 per month of Azure credits =). Note your VSTS extra environments will no longer work, you can only use the Prod Build and Release process now. 
+2. If you want to keep most of the process intact in one environment: downgrade your two Azure App Services back to Free (which will remove your slots for Dev/QA/staging), and remove the Dev and QA versions of the DB. You will now just have the production slot to experiment with for a total cost of $5 per month of Azure credits =). Note your VSTS extra environments will no longer work, you can only use the Prod Build and Release process now. 
 
 
-*Research tags
-research web config for different environments in build
-research adding approvers
