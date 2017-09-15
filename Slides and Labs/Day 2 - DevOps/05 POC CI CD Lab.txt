@@ -1,0 +1,4 @@
+Please visit: https://github.com/catenn/ToDoListAzure/blob/master/README.md
+
+Complete Part 3-5. 
+Read and complete the Cleanup after if you would like to save Azure credits. 

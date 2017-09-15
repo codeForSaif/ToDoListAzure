@@ -1,0 +1,248 @@
+-------------------------------------------------------
+Read me FIRST! Instructions
+-------------------------------------------------------
+For Azure CLI commands you can either use Command Prompt or a Powershell window. For the Azure Powershell commands you must use a Powershell Window. Using the cheatsheet text file given to you, complete the following tasks using the command line tools. Go through all lab steps with the Azure CLI first. Then redo all the steps using the Azure Powershell commands. 
+
+-------------------------------------------------------
+Installation Links
+-------------------------------------------------------
+If you do not have the Azure CLI installed, please go here:
+https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest
+
+If you do not have the Azure Powershell installed, please go here (under Command-Line tool > PowerShell):
+https://azure.microsoft.com/en-us/downloads/
+
+-------------------------------------------------------
+Lab Steps
+-------------------------------------------------------
+1. Login to your Azure account with the Web browser.
+2. Get all of your subscriptions
+3. Set your subscription to the one you will use for this lab
+4. View all resource groups in your subscription.
+5. Create a new Resource Group in the east us, call if anything you like but rememeber its name.
+6. List all resources under your new Resource Group. There should be none.
+7. Get a list of all VM SKUs or just windowsserver VM SKUs.
+8. Create a new win2016datacenter VM. It will ask for your admin password, this is just your Azure Portal password. Enter it when it asks for it and then again when it asks for confirmation. It will take a few mins to complete creation of the new VM.  
+
+If you are doing this for PowerShell, visit this URL: https://docs.microsoft.com/en-us/azure/virtual-machines/scripts/virtual-machines-windows-powershell-sample-create-vm 
+	*Change the location and resource group name to the one you just created. 
+	*Change the size from Standard_D1 to Standard_A1. Standard_D1 will require a Storage account. 
+	*Make any VM name that you want. 
+	*Use whatever username and password you want for the VM (except for "admin", this will cause an error), this would be used to RDP into the VM. 
+	*On the Last Step #Create a Virtual machine.. you will have to hit Enter one more time.
+	*You can either run this command directly in PowerShell or put it into a script file. 
+9. List all resources under your new Resource Group. There should be one, your new VM. 
+10. Login to the portal and verify your new VM and resource group exists. 
+11. Stop and deallocate your VM.
+12. Ensure it is stopped on the Azure portal.
+13. Start your VM using commands.
+14. Ensure it is started on the Azure portal. 
+15. Tag your VM with "Dept = IT". HINT the Resource type for a VM is: Microsoft.Compute/VirtualMachines  
+16. Add an additonal tag
+17. Get all tags for your VM. Also verify tags are seen on Azure Portal.
+18. Delete the resource group. This will take a few minutes to complete (2-5 mins).
+19. Verify it has been deleted in your Azure Portal. 
+
+
+-------------------------------------------------------------
+If you get stuck, please scroll down to see the lab solutions below (Azure CLI and PowerShell solutions are separate):
+-------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------
+Azure CLI Solutions
+-------------------------------------------------------------
+1. Login to your Azure account with the Web browser.
+az login
+
+2. Get all of your subscriptions
+az account list
+
+3. Set your subscription to the one you will use for this lab
+az account set --subscription 7c99355b-91ac-4bb3-833e-1c621ceb1998
+
+4. View all resource groups in your subscription.
+az resource list
+
+5. Create a new Resource Group in the east us, call if anything you like but rememeber its name.
+az group create --name ct-new-rg --location eastus
+
+6. List all resources under your new Resource Group. There should be none.
+az resource list --resource-group ct-new-rg
+
+7. Get a list of all VM SKUs or just windowsserver VM SKUs.
+az vm list-sizes --location eastus
+
+8. Create a new win2016datacenter VM. 
+az vm create --resource-group ct-new-rg --name ct-new-vm --image win2016datacenter
+
+9. List all resources under your new Resource Group. There should be one, your new VM. 
+az resource list --resource-group ct-new-rg
+
+10. Login to the portal and verify your new VM and resource group exists. 
+www.portal.azure.com
+
+11. Stop and deallocate your VM.
+az vm deallocate --resource-group ct-new-rg --name ct-new-vm
+
+12. Ensure it is stopped on the Azure portal.
+www.portal.azure.com
+
+13. Start your VM using commands.
+az vm start --resource-group ct-new-rg --name ct-new-vm
+
+14. Ensure it is started on the Azure portal. 
+www.portal.azure.com
+
+15. Tag your VM with "Dept = IT"
+az resource tag --tags Dept=IT -g ct-new-rg -n ct-new-vm --resource-type "Microsoft.Compute/VirtualMachines"
+
+16. Add an additonal tag
+az resource show --query tags -g ct-new-rg -n ct-new-vm --resource-type "Microsoft.Compute/VirtualMachines"
+
+az resource tag --tags Company=Microsoft Dept=IT -g ct-new-rg -n ct-new-vm --resource-type "Microsoft.Compute/VirtualMachines"
+
+17. Get all tags for your VM. Also verify tags are seen on Azure Portal.
+az resource show -g ct-new-rg -n ct-new-vm --resource-type "Microsoft.Compute/VirtualMachines" --query tags
+
+18. Delete the resource group. 
+az group delete --name ct-new-rg
+
+19. Verify it has been deleted in your Azure Portal. 
+www.portal.azure.com
+-------------------------------------------------------------
+Azure PowerShell Solutions
+-------------------------------------------------------------
+1. Login to your Azure account with the Web browser.
+Login-AzureRmAccount
+
+2. Get all of your subscriptions
+Get-AzureRmSubscription
+
+3. Set your subscription to the one you will use for this lab
+Select-AzureRmsubscription -TenantId 72f988bf-86f1-41af-91ab-2d7cd011db47
+
+4. View all resource groups in your subscription.
+Get-AzureRmResourceGroup
+
+5. Create a new Resource Group in the east us, call if anything you like but rememeber its name.
+New-AzureRmResourceGroup -Name ct-new-rg -Location "East US"
+
+6. List all resources under your new Resource Group. There should be none.
+Find-AzureRmResource -ResourceGroupNameContains "ct-new-rg"
+
+7. Get a list of all VM SKUs or just windowsserver VM SKUs.
+Get-AzureRmVMImagesku -Location eastus `
+                      -PublisherName MicrosoftWindowsServer `
+                      -Offer windowsserver
+
+8. Create a new win2016datacenter VM. 
+# Variables for common values
+$resourceGroup = "ct-new-rg1"
+$location = "eastus"
+$vmName = "myVM2"
+
+# Create user object
+$cred = Get-Credential -Message "Enter a username and password for the virtual machine."
+
+# Create a resource group
+New-AzureRmResourceGroup -Name $resourceGroup -Location $location
+
+# Create a subnet configuration
+$subnetConfig = New-AzureRmVirtualNetworkSubnetConfig -Name mySubnet -AddressPrefix 192.168.1.0/24
+
+# Create a virtual network
+$vnet = New-AzureRmVirtualNetwork -ResourceGroupName $resourceGroup -Location $location `
+  -Name MYvNET -AddressPrefix 192.168.0.0/16 -Subnet $subnetConfig
+
+# Create a public IP address and specify a DNS name
+$pip = New-AzureRmPublicIpAddress -ResourceGroupName $resourceGroup -Location $location `
+  -Name "mypublicdns$(Get-Random)" -AllocationMethod Static -IdleTimeoutInMinutes 4
+
+# Create an inbound network security group rule for port 3389
+$nsgRuleRDP = New-AzureRmNetworkSecurityRuleConfig -Name myNetworkSecurityGroupRuleRDP  -Protocol Tcp `
+  -Direction Inbound -Priority 1000 -SourceAddressPrefix * -SourcePortRange * -DestinationAddressPrefix * `
+  -DestinationPortRange 3389 -Access Allow
+
+# Create a network security group
+$nsg = New-AzureRmNetworkSecurityGroup -ResourceGroupName $resourceGroup -Location $location `
+  -Name myNetworkSecurityGroup -SecurityRules $nsgRuleRDP
+
+# Create a virtual network card and associate with public IP address and NSG
+$nic = New-AzureRmNetworkInterface -Name myNic -ResourceGroupName $resourceGroup -Location $location `
+  -SubnetId $vnet.Subnets[0].Id -PublicIpAddressId $pip.Id -NetworkSecurityGroupId $nsg.Id
+
+# Create a virtual machine configuration
+$vmConfig = New-AzureRmVMConfig -VMName $vmName -VMSize Standard_A1 | `
+Set-AzureRmVMOperatingSystem -Windows -ComputerName $vmName -Credential $cred | `
+Set-AzureRmVMSourceImage -PublisherName MicrosoftWindowsServer -Offer WindowsServer -Skus 2016-Datacenter -Version latest | `
+Add-AzureRmVMNetworkInterface -Id $nic.Id
+
+# Create a virtual machine
+New-AzureRmVM -ResourceGroupName $resourceGroup -Location $location -VM $vmConfig
+
+9. List all resources under your new Resource Group. There should be one, your new VM. 
+Find-AzureRmResource -ResourceGroupNameContains "ct-new-rg"
+
+10. Login to the portal and verify your new VM and resource group exists. 
+www.portal.azure.com
+
+11. Stop and deallocate your VM.
+Stop-AzureRmVM -ResourceGroupName ct-new-rg -Name myVM
+
+12. Ensure it is stopped on the Azure portal.
+www.portal.azure.com
+
+13. Start your VM using commands.
+Start-AzureRmVM -ResourceGroupName ct-new-rg -Name myVM
+
+14. Ensure it is started on the Azure portal. 
+www.portal.azure.com
+
+15. Tag your VM with "Dept = IT"
+Set-AzureRmResource -Tag @{ Dept="IT"; Environment="Test" } -ResourceName myVM -ResourceGroupName ct-new-rg -ResourceType Microsoft.Compute/VirtualMachines
+
+16. Add an additonal tag
+$tags = (Get-AzureRmResource -ResourceName myVM -ResourceGroupName ct-new-rg).Tags
+$tags += @{Company="Microsoft"}
+Set-AzureRmResource -Tag $tags -ResourceName myVM -ResourceGroupName ct-new-rg -ResourceType Microsoft.Compute/VirtualMachines
+
+17. Get all tags for your VM.  Also verify tags are seen on Azure Portal.
+(Get-AzureRmResource -ResourceName myVM -ResourceGroupName ct-new-rg).Tags
+
+18. Delete the resource group. 
+Remove-AzureRmResourceGroup -Name ct-new-rg
+
+19. Verify it has been deleted in your Azure Portal. 
+www.portal.azure.com

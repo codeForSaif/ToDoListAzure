@@ -1,0 +1,167 @@
+Azure CLI 2.0 and Powershell Azure cheatsheet
+
+---------------------------------------------------------------------------------
+LOGGING IN
+---------------------------------------------------------------------------------
+# Login with Web Browser
+az login
+Login-AzureRmAccount
+
+# Login in CLI
+az login -u myemail@address.com
+
+# Get the subscriptions available
+az account list
+Get-AzureRmSubscription
+
+# Set your subscription
+az account set --subscription subscriptionId
+Select-AzureRmsubscription -TenantId tenantId
+
+---------------------------------------------------------------------------------
+LISTING LOCATIONS AND RESOURCES / GENERAL
+---------------------------------------------------------------------------------
+# List all locations
+az account list-locations
+Get-AzureRmLocation
+
+# List all my resource groups
+az resource list
+Get-AzureRmResourceGroup
+
+# List all resources in my resource group
+az resource list --resource-group ct-new-rg
+Find-AzureRmResource -ResourceGroupNameContains "RGName"
+
+# Get what version of the CLI you have
+azure --version
+Get-Module -ListAvailable -Name Azure -Refresh
+
+# Get help
+azure help
+Get-Help AzureRM
+Get-Help <cmdlet name>
+---------------------------------------------------------------------------------
+CREATING BASIC VM / RESOURCE GROUP / STORAGE ACCOUNT
+---------------------------------------------------------------------------------
+# Create a Resource group
+az group create --name myresourcegroup --location eastus
+New-AzureRmResourceGroup -Name TestRG1 -Location "South Central US"
+
+# Get all available VM sizes	
+az vm list-sizes --location eastus
+Get-AzureRmVmSize -Location "East US" | Sort-Object Name | ft Name, NumberOfCores, MemoryInMB, MaxDataDiskCount -AutoSize
+
+# Get all available VM images for Windows and Linux**
+az vm image list --output table
+Get-AzureRmVMImagesku -Location eastus `
+                      -PublisherName MicrosoftWindowsServer `
+                      -Offer windowsserver
+
+# Create a VM  (change image to ubuntults for ex. for Linux)
+az vm create --resource-group myResourceGroup --name myVM --image win2016datacenter
+For PowerShell, go here (the command is very long! note also, you need an exisiting Storage account if you have a Premium Storage size such as in the example with the Standard D1. Or you can change the sample code to have a Standard A1 for example which has no premium storage requirement and will not need the storage account.): https://docs.microsoft.com/en-us/azure/virtual-machines/scripts/virtual-machines-windows-powershell-sample-create-vm
+
+	# Define a credential object
+	$cred = Get-Credential
+
+	# Create a virtual machine configuration
+	$vmConfig = New-AzureRmVMConfig -VMName myVM -VMSize Standard_DS2 | `
+		Set-AzureRmVMOperatingSystem -Windows -ComputerName myVM -Credential $cred | `
+		Set-AzureRmVMSourceImage -PublisherName MicrosoftWindowsServer -Offer WindowsServer `
+		-Skus 2016-Datacenter -Version latest | Add-AzureRmVMNetworkInterface -Id $nic.Id
+
+	New-AzureRmVM -ResourceGroupName myResourceGroup -Location EastUS -VM $vmConfig
+
+# Create a Storage account.
+az storage account create -g myresourcegroup -n mystorageaccount -l eastus --sku Standard_LRS
+New-AzureRmStorageAccount -ResourceGroupName TestRG1 -AccountName mystoragename -Type "Standard_LRS" -Location "South Central US"
+---------------------------------------------------------------------------------
+DELETING A RESOURCE GROUP
+---------------------------------------------------------------------------------
+# Permanetly deletes a resource group
+az group delete --name myResourceGroup
+Remove-AzureRmResourceGroup -Name TestRG1
+
+---------------------------------------------------------------------------------
+MANAGING VM'S
+---------------------------------------------------------------------------------
+# List your VMs	
+az vm list
+Get-AzureRmVM
+
+# Start a VM	
+az vm start --resource-group myResourceGroup --name myVM
+Start-AzureRmVM -ResourceGroupName $myResourceGroup -Name $myVM
+
+# Stop a VM	without deallocating (still charged for stopped VM)
+az vm stop --resource-group myResourceGroup --name myVM
+Stop-AzureRmVM -StayProvisioned -ResourceGroupName $myResourceGroup -Name $myVM 
+
+# Stop & Deallocate a VM (no charge for VM that is stopped)
+az vm deallocate --resource-group myResourceGroup --name myVM
+Stop-AzureRmVM -ResourceGroupName $myResourceGroup -Name $myVM
+
+# Restart a running VM	
+az vm restart --resource-group myResourceGroup --name myVM
+Restart-AzureRmVM -ResourceGroupName $myResourceGroup -Name $myVM
+
+# Redeploy a VM	
+az vm redeploy --resource-group myResourceGroup --name myVM
+Set-AzureRmVM -Redeploy -ResourceGroupName "myResourceGroup" -Name "myVM"
+
+# Delete a VM	
+az vm delete --resource-group myResourceGroup --name myVM
+Remove-AzureRmVM -ResourceGroupName $myResourceGroup -Name $myVM
+
+
+---------------------------------------------------------------------------------
+TAGGING RESOURCES
+---------------------------------------------------------------------------------
+# Get your version of Powershell. The following commands will work for 3.0 or later, if you have a lower version please update it. 
+Get-Module -ListAvailable -Name AzureRm.Resources | Select Version
+
+# See existing tags for a resource group
+az group show -n examplegroup --query tags
+(Get-AzureRmResourceGroup -Name examplegroup).Tags
+
+# See existing tags for a resource
+az resource show --id {resource-id} --query tags
+az resource show -g examplegroup -n examplevnet --resource-type "Microsoft.Compute/virtualMachines" --query tags
+(Get-AzureRmResource -ResourceId {resource-id}).Tags
+(Get-AzureRmResource -ResourceName examplevnet -ResourceGroupName examplegroup).Tags
+
+# To get resource groups with a specific tag
+az group list --tag Company=Microsoft
+(Find-AzureRmResourceGroup -Tag @{ Dept="Finance" }).Name
+
+# To get all the resources with a particular tag and value
+az resource list --tag Company=Microsoft
+(Find-AzureRmResource -TagName Dept -TagValue Finance).Name
+
+# Add tag to a RESOURCE GROUP WITHOUT existing tags
+az group update -n containers-setup-ct --set tags.Company=Microsoft
+Set-AzureRmResourceGroup -Name examplegroup -Tag @{ Dept="IT"; Environment="Test" }
+
+# Add tag to a RESOURCE WITHOUT existing tags ** SEE below two commands to get resource-type!!!!!
+az resource tag --tags Company=Microsoft Environment=Test -g myResourceGroupNameHere -n myNameOfBatchService --resource-type "Microsoft.Batch/batchAccounts"
+Set-AzureRmResource -Tag @{ Dept="IT"; Environment="Test" } -ResourceName mystoragename -ResourceGroupName TestRG1 -ResourceType Microsoft.Storage/storageAccounts
+
+	# To get a list of all resource types** For ex. Microsoft.Storage
+	az provider list --query "[].{Provider:namespace, Status:registrationState}" --out table
+
+	# To see resources for a provider** For ex. /storageAccounts
+	az provider show --namespace Microsoft.Storage --query "resourceTypes[*].resourceType" --out table
+
+	# As a note common resource-types you may use are:
+	# Microsoft.Compute/virtualMachines, Microsoft.Storage/storageAccounts, Microsoft.Batch/batchAccounts
+	
+# To add tags to a resource that already has tags, first retrieve the existing tags (line 1) -g is the Resource Group. -n is the name of the resource. 
+# Then reapply the existing tags to the resource, and add the new tags. You will overwrite the old existing tags completely unless you add them back in under the tags parameter (line 2)
+az resource show --query tags -g containers-setup-ct -n containerssetupctdiag857 --resource-type "Microsoft.Storage/storageAccounts"
+
+az resource tag --tags Company=Microsoft Environment=Test CostCenter=IT -g containers-setup-ct -n containerssetupctdiag857 --resource-type "Microsoft.Storage/storageAccounts"
+
+$tags = (Get-AzureRmResource -ResourceName mystoragename -ResourceGroupName TestRG1).Tags
+$tags += @{Status="Approved"}
+Set-AzureRmResource -Tag $tags -ResourceName mystoragename -ResourceGroupName TestRG1 -ResourceType Microsoft.Storage/storageAccounts

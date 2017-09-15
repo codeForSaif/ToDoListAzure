@@ -1,0 +1,155 @@
+-------------------------------------------------------
+Read me FIRST! Instructions
+-------------------------------------------------------
+Git command line is a quick and easy way to work with your project.  It is the only way to access all of the possible commands, as some GUI's or Visual Studio Integrations have a certain set of commands available.  Also you are able to specifically force/override commands as needed.  
+
+This lab goes alongside the Practical Git Commands Kickstart docx file and you will use that as a reference.  As you go along the steps, please make sure that you read the italicized text below the tables and the text in the tables for explanations on what each command does. The point of the lab is to show you how to research/reference the guide steps in order to teach you how to use Git.  The solutions are posted below if you scroll down in case you get stuck, or for future reference. 
+
+-------------------------------------------------------
+Installation Links
+-------------------------------------------------------
+If you do not have the Git Bash installed, go here: 
+https://git-scm.com/downloads
+
+If you do not have a GitHub account, please create one here: 
+https://github.com/join
+
+-------------------------------------------------------
+Lab Steps
+-------------------------------------------------------
+1. Create a new Visual Studio Project, it can be any kind but for a simple example please create a new Web Application (.NET Framework) with MVC.  Do not check any boxes for Unit Tests, Cloud integration, or version control.
+2. Go into the directory of the project using Windows Explorer. 
+3. Go to GitHub and create a new Repository. Navigate to the Repository page.
+4. Get the Project URL from the top right of the new Repository. Save it below so you can use it in the next step:
+
+5. Run the following 5 commands one at a time (replace the project url in the 4th step):
+	git init
+	git add .
+	git commit -m "Initial commit"
+	git remote add origin <project url>
+	git push -f origin master
+6. Go back to your GitHub Repository, refresh the page, and see that your code should be present.
+7. Go to your MVC project and make some changes to a View. 
+8. Stage your modified files.
+9. Commit them with a message. 
+10. Push them to your repository.
+11. Verify online on your GitHub repository page that the changes are seen.
+12. Create a new branch called "feature-branch-mvc" and switch to the new branch (find one command that will do both these steps).
+13. Go to your MVC project and make some more changes to a View. 
+14. Stage your modified files.
+15. Commit them with a message.
+16. Pretend that you are sharing this feature branch with another developer, and run and fetch to see if there are any exisitng changes. (There should not be).
+17. Check the status by running git status. 
+18. Push your changes once you know there are no incoming changes. If there were incoming changes, you would need to run a git pull and merge them into your changes. You can either merge in command line or in Visual Studio.  It is easier to merge in Visual Studio using the Git plugin for Visual Studio. 
+19. Make some garbage changes to your MVC View page.
+20. Run a git stash with a message.
+21. Verify that your changes are no longer in the View after you run the stash. 
+22. Unstash your changes with git stash pop or apply, read the difference between them in the document. Write the difference down below:
+ 
+23. Abandon / Undo the changes you did to this View file. 
+24. Make new changes to your View file.
+25. Stage your files. 
+26. Commit your changes. 
+27. Find the commit ID.
+28. Run git status.
+29. Remove the most recent commit. 
+30. Run git status.
+31. Change branches to your original branch, which is called: origin master **???
+32. Run a git merge on your original branch, and supply the name of your feature branch. 
+
+
+-------------------------------------------------------
+Scroll down for Solutions...
+-------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------
+Lab Solutions...
+-------------------------------------------------------
+1. Create a new Visual Studio Project, it can be any kind but for a simple example please create a new Web Application (.NET Framework) with MVC.  Do not check any boxes for Unit Tests, Cloud integration, or version control.
+2. Go into the directory of the project using Windows Explorer. 
+3. Go to GitHub and create a new Repository. Navigate to the Repository page.
+4. Get the Project URL from the top right of the new Repository. Save it below so you can use it in the next step:
+
+5. Run the following 5 commands one at a time (replace the project url in the 4th step):
+	git init
+	git add .
+	git commit -m "Initial commit"
+	git remote add origin <project url>
+	git push -f origin master
+6. Go back to your GitHub Repository, refresh the page, and see that your code should be present.
+7. Go to your MVC project and make some changes to a View. 
+8. Stage your modified files.
+	git add .
+9. Commit them with a message. 
+	git commit -m "Your message here."
+10. Push them to your repository.
+	git push -f origin master
+11. Verify online on your GitHub repository page that the changes are seen.
+12. Create a new branch called "feature-branch-mvc" and switch to the new branch (find one command that will do both these steps).
+	git checkout -b feature-branch-mvc
+13. Go to your MVC project and make some more changes to a View. 
+14. Stage your modified files.
+	git add .
+15. Commit them with a message.
+	git commit -m "Your message here."
+16. Pretend that you are sharing this feature branch with another developer, and run and fetch to see if there are any exisitng changes. (There should not be).
+	git fetch
+17. Check the status by running git status. 
+	git status
+18. Push your changes once you know there are no incoming changes. If there were incoming changes, you would need to run a git pull and merge them into your changes. You can either merge in command line or in Visual Studio.  It is easier to merge in Visual Studio using the Git plugin for Visual Studio. 
+	git push -f origin master
+19. Make some garbage changes to your MVC View page.
+20. Run a git stash with a message.
+	git stash save “my description here”
+21. Verify that your changes are no longer in the View after you run the stash. 
+22. Unstash your changes with git stash pop or apply, read the difference between them in the document. Write the difference down below:
+	git stash pop
+	The difference is that: git stash pop throws away the stash after 
+23. Abandon / Undo the changes you did to this View file. 
+	git checkout <file>
+24. Make new changes to your View file.
+25. Stage your files. 
+	git add .
+26. Commit your changes. 
+	git commit -m "Your message here."
+27. Find the commit ID.
+	git log
+28. Run git status.
+	git status
+29. Remove the most recent commit. 
+	git reset --hard HEAD~1
+30. Run git status.
+	git status
+31. Change branches to your original branch, which is called: origin master **???
+	git checkout existing-branch-name**??
+32. Run a git merge on your original branch, and supply the name of your feature branch. 
+	git merge feature-branch-mvc
+
+
+
+
+
+
+
+
