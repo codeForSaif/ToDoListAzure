@@ -54,8 +54,9 @@ Software used in tutorial:
       ![Alt text](/Images/Part1/06ConnectionString.png?raw=true "SQL DB Overview tab")
 6. Open SSMS and enter the Server name, username, and password. 
       ![Alt text](/Images/Part1/07SSMS.png?raw=true "SSMS Login")
+      
       *Note if you cannot login because of an IP address, please go to the Portal and add your IP address as allowed by clicking on the SQL Server you created, then going to Firewall*
-       ![Alt text](/Images/Part1/10.png?raw=true "SSMS Login")
+       ![Alt text](/Images/Part1/10.PNG?raw=true "SSMS Login")
 7. Create a new table that looks exactly like the following format (two columns which are "ID" and "Description", "ID" should be an int and "Description" should be type VARCHAR(500)).. you can make the description anything you'd like: 
 
       ID | Description
