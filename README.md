@@ -1,4 +1,9 @@
-# ToDoListAzure
+### Shared Info
+    <add name="todoItems" connectionString="Server=tcp:cattodolistdb.database.windows.net,1433;Initial Catalog=todolistdb;Persist Security Info=False;User ID=super;Password=P@ssw0rd!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" providerName="System.Data.EntityClient" />
+
+https://github.com/razi-rais/microservices/tree/master/reference-material/arm-templates
+
+ToDoListAzure
 This is a simple proof of concept to display an Azure App Service website communicating with an API project, which communicates to an Azure SQL backend.  The app is a To-Do application based on Microsoft's To-Do List app, but adapted for Azure deploy and to Visual Studio 2017 Preview.  The project is C#, Angular JS, and SQL. The primary objective of the tutorial is to show you how to deploy an Azure App Service Website + App Service API + Azure SQL and how to get it all working with a simple To-Do application. 
 
 **Timing: If you are a senior dev who knows Azure and VSTS very well I think you could complete this whole setup in 2-3 hours. If you are a senior dev new to Azure and VSTS I think it could be ~4-6 hours to complete.**
@@ -48,7 +53,7 @@ Software used in tutorial:
       ![Alt text](/Images/Part1/02DBOptions.png?raw=true "Creating a SQL DB")
 4. Click on All Resources on the left menu. You should see your new SQL Server and SQL Database. Click on the SQL Database. 
       ![Alt text](/Images/Part1/03AllResources.png?raw=true "Select your SQL DB")
-5. You land on the Overview tab.  Save the Server name from the main Overview tab of your new Azure SQL DB. Click on the Show Connection Strings hyperlink highlighted.
+5. You land on the Overview tab.  Save the Server name from the main Overview tab of your new Azure SQL DB. Click on the Show Connection Strings hyperlink highlighted. Save the connection strings also, see image below: 
       ![Alt text](/Images/Part1/05DatabaseOverview.png?raw=true "SQL DB Overview tab")
   The connection string page will look like this (save this in a Notepad for the web.config in the solution later):
       ![Alt text](/Images/Part1/06ConnectionString.png?raw=true "SQL DB Overview tab")
@@ -75,8 +80,8 @@ Software used in tutorial:
 
 # [Part 2]: Setup the C# Project
 1. Download this project if you haven't already (your should have in Part 1, step 9 though). 
-2. Build the project.
-3. Set the ToDoListDataAPI project as the Startup Project. 
+2. Open two solutions (ToDoListAngular and ToDoListAPI folders each contain a .sln file). Build each of the solutions.
+3. Go to the ToDoListDataAPI solution.. 
 4. Run the project. 
 5. Add "/swagger" to the end of your URL if it is not already there, you should see a page like this: 
       ![Alt text](/Images/Part2/01.png?raw=true "Swagger main page")
@@ -103,14 +108,19 @@ Software used in tutorial:
       ![Alt text](/Images/Part2/09.png?raw=true "Publishing the API project")
 18. Fill in all the settings: add in a name, choose the subscription, create a new resource group. For the App Service Plan: choose a name, the closest location to you and Free. Then on the main modal click Create. 
       ![Alt text](/Images/Part2/10.png?raw=true "Publishing the API project")
+If you are on the ToDoListAPI project, make sure you have API selected. 
+      ![Alt text](/Images/Part2/18.png?raw=true "Publishing the API project")
+If you are on the ToDoListAngular project, make sure you have Web App selected. 
+      ![Alt text](/Images/Part2/19.png?raw=true "Publishing the API project")
       ![Alt text](/Images/Part2/11.png?raw=true "Publishing the API project")
+
 19. Make sure it shows up in the Azure Portal after giving it a few minutes to publish. Click on the API project to go to the overview (red arrow).
       ![Alt text](/Images/Part2/12.png?raw=true "Publishing the API project")
 20. Copy the URL of the API App Service as highlighted in the screenshot. 
       ![Alt text](/Images/Part2/13.png?raw=true "Connecting your local front end project to the Azure API Service")
 21. Let's connect the front end to the API project.  Open up the ToDoListAngular solution.  Go to the web.config file of your front end ToDoListAngular project. Paste in the URL from the previous step. 
       ![Alt text](/Images/Part2/14.png?raw=true "Connecting your local front end project to the Azure API Service")
-22. Run the front end as Startup. It should look like this and be connected to the Azure API Service.
+22. Run the ToDoListAngular solution. It should look like this and be connected to the Azure API Service.
       ![Alt text](/Images/Part2/18.png?raw=true "Connecting your local front end project to the Azure API Service")
 21. Let's do the same publishing to Azure for the front end project.  Repeat steps 16-18 for the front end ToDoListAngular project. 
 22. Verify once you are done Publishing that it is in the Azure Portal.  Click on the APp Service (red arrow in screenshot). 
@@ -130,6 +140,7 @@ Software used in tutorial:
       ![Alt text](/Images/Part3/02.png?raw=true)
 5. Add the code for ToDoListAngular. Go to the root folder of the ToDoListAngular solution (should look like below), right click and select Git Bash. *Note if you pulled this down in as a zip file, go to the next step.  If you pulled it down using Git Bash originally, make Hidden Folders visible, then delete the .git folder before continuing.*
       ![Alt text](/Images/Part3/03.png?raw=true)
+      
 Also get the URL of your Project by going to the Code tab:
       ![Alt text](/Images/Part3/03b.png?raw=true)
 6. Run the following commands in order, one by one. Make sure on the 4th command you change the URL to your project URL. 
@@ -158,30 +169,30 @@ Also get the URL of your Project by going to the Code tab:
 14. On the next landing page, add a name for it as ToDoListAngular-Dev-CI.  Choose Hosted.  Add the .sln file by clicking the 3 dots and finding it. When you get to Azure Subscription, choose it from the dropdown, then hit Authorize.  Wait a minute, and it will populate the App Services you have. Choose the corresponding App Service. 
       ![Alt text](/Images/Part3/11a.png?raw=true)
 15. Click on the Triggers tab. Check the slider to Enabled.  Choose to Include Develop, make sure it is the right branch. 
-      ![Alt text](/Images/Part3/12.png?raw=true)
+      ![Alt text](/Images/Part3/12.PNG?raw=true)
 16. Click Save and Queue. You have now setup the Dev build. 
       ![Alt text](/Images/Part3/13.png?raw=true)
 17. Repeat steps 12-16 for QA and Prod, make sure you associate the name of the build and the trigger with the correct branch name (QA and Prod). At the end your Build "All Definitions" tab should look like this:
-      ![Alt text](/Images/Part3/15.png?raw=true)
+      ![Alt text](/Images/Part3/15.PNG?raw=true)
 18. Now, repeat steps 12-17 for the ToDoListDataAPI project. Switch projects by clicking top left name of project as in screenshot: 
       ![Alt text](/Images/Part3/16.png?raw=true)
 19. Your ToDoListDataAPI project Builds should look like this:
-      ![Alt text](/Images/Part3/17.png?raw=true)
+      ![Alt text](/Images/Part3/17.PNG?raw=true)
 
 # [Part 4]: Setup Dev, QA, and Staging/Prod environments for all tiers
 1. First, go to the Azure Portal.  Go to the ToDoListAngular Web App, click on Scale up (App Service Plan), then choose S1 Standard.  (Standard is cheaper and will work perfectly fine, as it has 5 slots.  Choose S1 for the purposes of this tutorial.)
-      ![Alt text](/Images/Part4/01.png?raw=true)
+      ![Alt text](/Images/Part4/01.PNG?raw=true)
 2. Create slots for Dev, QA, and Staging in both of your App Services. 
-      ![Alt text](/Images/Part4/02.png?raw=true)
-      ![Alt text](/Images/Part4/02b.png?raw=true)
+      ![Alt text](/Images/Part4/02.PNG?raw=true)
+      ![Alt text](/Images/Part4/02b.PNG?raw=true)
 3. Repeat steps 1-2 for you ToDoListDataAPI app. 
 3. Go to your database.  Click Copy and create a Dev, QA, and Staging version, make sure you choose basic as the size. The existing one will be prod.  Make sure you choose the same server the original DB was one.  Keep the pricing tier as Basic so it is only $5 a month, this is the cheapest option. No elastic pool. 
-      ![Alt text](/Images/Part4/03.png?raw=true)
-      ![Alt text](/Images/Part4/03b.png?raw=true)
+      ![Alt text](/Images/Part4/03.PNG?raw=true)
+      ![Alt text](/Images/Part4/03b.PNG?raw=true)
 4. Login to SSMS for Dev and QA and add a Todo item for each that tells which environment you are currently in. 
 5. Go to the Azure Portal and click all Resources as seen in first screenshot below.  Click on each staging slot for ToDoListDataAPI which should be Dev and QA and record the URL from the overview page. You will need these URLs for step 7.
       ![Alt text](/Images/Part4/07.png?raw=true)
-      ![Alt text](/Images/Part4/07a.png?raw=true)
+      ![Alt text](/Images/Part4/07a.PNG?raw=true)
 6. Go to the Azure Portal and click all Resources as seen in first screenshot below.  Click on each SQL DB environment instance: Dev, QA, and Staging. Click on Show connection strings.  Fill in the username and password of the connection string before recording it. You do not need prod as this one is already setup in the prod code environment. You will need the Dev and QA connection strings for step 9 and the Staging and Production connection strings for step 10.
       ![Alt text](/Images/Part4/08.png?raw=true)
       ![Alt text](/Images/Part4/08b.png?raw=true)
@@ -205,17 +216,17 @@ Also get the URL of your Project by going to the Code tab:
 1. Go to the Releases tab in VSTS for the ToDoListDataAPI project and hit Create a new release
       ![Alt text](/Images/Part5/01.png?raw=true)
 2. Choose the Azure App Service Deployment template. For the environment name, put Develop. Click on Policies, you can set these in the future when you add a manual approver. You can hit the "X" button to close the right slideout menu and continue setting up the Release Definition. 
-      ![Alt text](/Images/Part5/02.png?raw=true)
-      ![Alt text](/Images/Part5/02b.png?raw=true)
+      ![Alt text](/Images/Part5/02.PNG?raw=true)
+      ![Alt text](/Images/Part5/02b.PNG?raw=true)
 3. Click the pencil icon and change the name to "ToDoListDataAPI-CD-Dev".
-      ![Alt text](/Images/Part5/03.png?raw=true)
+      ![Alt text](/Images/Part5/03.PNG?raw=true)
 4. Add an artifact that connects to your Dev build.  Choose your Dev CI build, it will add extra settings, leave these at default, then click Add. 
-      ![Alt text](/Images/Part5/04.png?raw=true)
+      ![Alt text](/Images/Part5/04.PNG?raw=true)
        ![Alt text](/Images/Part5/05.png?raw=true)
 5. Click the Tasks tab to edit the tasks under the Dev environment. 
        ![Alt text](/Images/Part5/06.png?raw=true)
 6. On the Dev Development Process (where you land) add your subscription and app service name. 
-       ![Alt text](/Images/Part5/07.png?raw=true)
+       ![Alt text](/Images/Part5/07.PNG?raw=true)
 7. Click on the Deploy Azure App Service task.  Check the box for Deploy to slot. Add the resource group and the slot.  The slot for the dev one should be dev. All other settings on this task should remain at default. 
        ![Alt text](/Images/Part5/08.png?raw=true)
 8. Click back to the Pipeline. Click the lightning icon on the artifact for the CD trigger to make it automatically deploy after a successful new build exists. Click to enable it. Choose the build branch to be develop to match the CD environment. 
