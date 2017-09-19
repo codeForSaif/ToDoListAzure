@@ -34,11 +34,11 @@ az resource list --resource-group ct-new-rg
 Find-AzureRmResource -ResourceGroupNameContains "RGName"
 
 # Get what version of the CLI you have
-azure --version
+az --version
 Get-Module -ListAvailable -Name Azure -Refresh
 
 # Get help
-azure help
+az help
 Get-Help AzureRM
 Get-Help <cmdlet name>
 ---------------------------------------------------------------------------------
