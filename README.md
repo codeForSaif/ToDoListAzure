@@ -48,7 +48,7 @@ Software used in tutorial:
       ![Alt text](/Images/Part1/02DBOptions.png?raw=true "Creating a SQL DB")
 4. Click on All Resources on the left menu. You should see your new SQL Server and SQL Database. Click on the SQL Database. 
       ![Alt text](/Images/Part1/03AllResources.png?raw=true "Select your SQL DB")
-5. You land on the Overview tab.  Save the Server name from the main Overview tab of your new Azure SQL DB. Click on the Show Connection Strings hyperlink highlighted.
+5. You land on the Overview tab.  Save the Server name from the main Overview tab of your new Azure SQL DB. Click on the Show Connection Strings hyperlink highlighted. Save the connection strings also, see image below: 
       ![Alt text](/Images/Part1/05DatabaseOverview.png?raw=true "SQL DB Overview tab")
   The connection string page will look like this (save this in a Notepad for the web.config in the solution later):
       ![Alt text](/Images/Part1/06ConnectionString.png?raw=true "SQL DB Overview tab")
@@ -75,8 +75,8 @@ Software used in tutorial:
 
 # [Part 2]: Setup the C# Project
 1. Download this project if you haven't already (your should have in Part 1, step 9 though). 
-2. Build the project.
-3. Set the ToDoListDataAPI project as the Startup Project. 
+2. Open two solutions (ToDoListAngular and ToDoListAPI folders each contain a .sln file). Build each of the solutions.
+3. Go to the ToDoListDataAPI solution.. 
 4. Run the project. 
 5. Add "/swagger" to the end of your URL if it is not already there, you should see a page like this: 
       ![Alt text](/Images/Part2/01.png?raw=true "Swagger main page")
@@ -110,7 +110,7 @@ Software used in tutorial:
       ![Alt text](/Images/Part2/13.png?raw=true "Connecting your local front end project to the Azure API Service")
 21. Let's connect the front end to the API project.  Open up the ToDoListAngular solution.  Go to the web.config file of your front end ToDoListAngular project. Paste in the URL from the previous step. 
       ![Alt text](/Images/Part2/14.png?raw=true "Connecting your local front end project to the Azure API Service")
-22. Run the front end as Startup. It should look like this and be connected to the Azure API Service.
+22. Run the ToDoListAngular solution. It should look like this and be connected to the Azure API Service.
       ![Alt text](/Images/Part2/18.png?raw=true "Connecting your local front end project to the Azure API Service")
 21. Let's do the same publishing to Azure for the front end project.  Repeat steps 16-18 for the front end ToDoListAngular project. 
 22. Verify once you are done Publishing that it is in the Azure Portal.  Click on the APp Service (red arrow in screenshot). 
