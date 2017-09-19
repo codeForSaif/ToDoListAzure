@@ -108,7 +108,12 @@ Software used in tutorial:
       ![Alt text](/Images/Part2/09.png?raw=true "Publishing the API project")
 18. Fill in all the settings: add in a name, choose the subscription, create a new resource group. For the App Service Plan: choose a name, the closest location to you and Free. Then on the main modal click Create. 
       ![Alt text](/Images/Part2/10.png?raw=true "Publishing the API project")
+If you are on the ToDoListAPI project, make sure you have API selected. 
+      ![Alt text](/Images/Part2/18.png?raw=true "Publishing the API project")
+If you are on the ToDoListAngular project, make sure you have Web App selected. 
+      ![Alt text](/Images/Part2/19.png?raw=true "Publishing the API project")
       ![Alt text](/Images/Part2/11.png?raw=true "Publishing the API project")
+
 19. Make sure it shows up in the Azure Portal after giving it a few minutes to publish. Click on the API project to go to the overview (red arrow).
       ![Alt text](/Images/Part2/12.png?raw=true "Publishing the API project")
 20. Copy the URL of the API App Service as highlighted in the screenshot. 
