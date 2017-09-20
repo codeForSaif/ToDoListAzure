@@ -1,9 +1,3 @@
-### Shared Info
-    <add name="todoItems" connectionString="Server=tcp:cattodolistdb.database.windows.net,1433;Initial Catalog=todolistdb;Persist Security Info=False;User ID=super;Password=P@ssw0rd!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;" providerName="System.Data.EntityClient" />
-
-https://github.com/razi-rais/microservices/tree/master/reference-material/arm-templates
-
-ToDoListAzure
 This is a simple proof of concept to display an Azure App Service website communicating with an API project, which communicates to an Azure SQL backend.  The app is a To-Do application based on Microsoft's To-Do List app, but adapted for Azure deploy and to Visual Studio 2017 Preview.  The project is C#, Angular JS, and SQL. The primary objective of the tutorial is to show you how to deploy an Azure App Service Website + App Service API + Azure SQL and how to get it all working with a simple To-Do application. 
 
 **Timing: If you are a senior dev who knows Azure and VSTS very well I think you could complete this whole setup in 2-3 hours. If you are a senior dev new to Azure and VSTS I think it could be ~4-6 hours to complete.**
@@ -168,6 +162,8 @@ Also get the URL of your Project by going to the Code tab:
       ![Alt text](/Images/Part3/10.png?raw=true)
 14. On the next landing page, add a name for it as ToDoListAngular-Dev-CI.  Choose Hosted.  Add the .sln file by clicking the 3 dots and finding it. When you get to Azure Subscription, choose it from the dropdown, then hit Authorize.  Wait a minute, and it will populate the App Services you have. Choose the corresponding App Service. 
       ![Alt text](/Images/Part3/11a.png?raw=true)
+14b. Click on the Get Sources tab and check the Branch that is chosen. Make sure it matches the branch that you are working in. 
+      ![Alt text](/Images/Part3/18.png?raw=true)
 15. Click on the Triggers tab. Check the slider to Enabled.  Choose to Include Develop, make sure it is the right branch. 
       ![Alt text](/Images/Part3/12.PNG?raw=true)
 16. Click Save and Queue. You have now setup the Dev build. 
