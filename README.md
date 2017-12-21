@@ -2,8 +2,6 @@ This is a simple proof of concept to display an Azure App Service website commun
 
 **Timing: If you are a senior dev who knows Azure and VSTS very well I think you could complete this whole setup in 2-3 hours. If you are a senior dev new to Azure and VSTS I think it could be ~4-6 hours to complete.**
 
-![alt text](https://docs.microsoft.com/en-us/azure/app-service-api/media/app-service-api-dotnet-get-started/todospa.png)
-
 The code is based on this tutorial here: https://docs.microsoft.com/en-us/azure/app-service-api/app-service-api-dotnet-get-started
 
 Software used in tutorial:
