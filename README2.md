@@ -1,23 +1,17 @@
 
 This is a simple proof of concept to display an Azure App Service website communicating with an API project, which communicates to an Azure SQL backend.  The app is a To-Do application based on Microsoft's To-Do List app (https://docs.microsoft.com/en-us/azure/app-service-api/app-service-api-dotnet-get-started), but adapted for Azure deploy and to Visual Studio 2017.  The project technology stack is C#, Angular JS, Swagger, Dapper, and SQL. The primary objective of the tutorial is to show you how to deploy an Azure App Service Website + App Service API + Azure SQL and how to get it all working with a simple To-Do application. 
 
-You can create a free Azure account with an MSDN / MyVisualStudio account or by signing up for a free month trial here: https://azure.microsoft.com/en-us/free/?v=17.39&WT.srch=1&WT.mc_id=AID631184_SEM_bp6n8E3v&lnkd=Google_Azure_
-
-You can sign up for a free VSTS account here: https://www.visualstudio.com/team-services/
-
-You need to make sure that you use the same email address for your Azure and VSTS account so they can automatically recognize each other's resources, otherwise you will need to add both emails to your Azure subscription. 
-
 This tutorial is split into parts so that you can choose what you would like to complete. Depending on your interest, for example, you can complete Part 1 and Part 3, or just Part 1 and Part 2.
 
-**Timing Estimates to complete full tutorial: 
-Senior dev with Azure and VSTS experience: 1 hour
-Senior dev with no Azure and VSTS experience: 2 hours
-Junior dev: 3 - 5 hours
+Timing Estimates to complete full tutorial: 
+*Senior dev with Azure and VSTS experience: 1 hour
+*Senior dev with no Azure and VSTS experience: 2 hours
+*Junior dev: 3 - 5 hours
 
-**Azure Credit Costs: 
-Each Basic DB costs $5 per month 
-Basic App Services cost $0 (free)
-VSTS account costs $0 for up to 5 Basic users (free)
+Azure Credit Costs: 
+*Each Basic DB costs $5 per month 
+*Basic App Services cost $0 (free)
+*VSTS account costs $0 for up to 5 Basic users (free)
 
 ### Overview of guide:
 **Part 1: Setup the C# Project, learn Swagger, and Deploy it manually to Azure**
@@ -49,6 +43,12 @@ VSTS account costs $0 for up to 5 Basic users (free)
 **Part 4: Cleanup**
 *This will be an explanation of costs of each service and how to remove everything -or- how to remove most of the costs and keep everything running in one environment for $5 a month if you want to keep this example active in your Portal.*
 
+
+# [Part 0]: Software Installs / Setup
+1. You can get Visual Studio 2017 Community for free here: https://www.visualstudio.com/downloads/
+2. You can create a free Azure account with an MSDN / MyVisualStudio account or by signing up for a free month trial here: https://azure.microsoft.com/en-us/free/?v=17.39&WT.srch=1&WT.mc_id=AID631184_SEM_bp6n8E3v&lnkd=Google_Azure_
+3. You can sign up for a free VSTS account here: https://www.visualstudio.com/team-services/
+You need to make sure that you use the same email address for your Azure and VSTS account so they can automatically recognize each other's resources, otherwise you will need to add both emails to your Azure subscription. 
 
 # [Part 1]: Setup the C# Project
 1. Download this project if you haven't already (your should have in Part 1, step 9 though). 
