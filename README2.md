@@ -5,7 +5,7 @@ This tutorial is split into parts so that you can choose what you would like to 
 
 Timing Estimates to complete full tutorial: 
 * Senior dev with Azure and VSTS experience: 1 hour
-* Senior dev with no Azure and VSTS experience: 2 hours
+* Senior dev with no Azure and VSTS experience: 2 - 3 hours
 * Junior dev: 3 - 5 hours
 
 Azure Credit Costs (total is $5 per month): 
@@ -14,6 +14,11 @@ Azure Credit Costs (total is $5 per month):
 * VSTS account costs $0 for up to 5 Basic users (free)
 
 ### Overview of guide:
+**Part 0: Software Installation / Setup**
+
+*This section will provide links for necessary software for the tutorial* 
+
+
 **Part 1: Setup the C# Project, learn Swagger, and Deploy it manually to Azure**
 
 *The web project consists of a Web App and an API app that communicate.  Note the API app is currently hardcoded with values since it does not yet have a database connection.  You will test the Web App can connect to the Azure Web API project locally and on the cloud.  You will also learn how to manually deploy your Web App and Web API to the cloud.* 
@@ -44,13 +49,17 @@ Azure Credit Costs (total is $5 per month):
 *This will be an explanation of costs of each service and how to remove everything -or- how to remove most of the costs and keep everything running in one environment for $5 a month if you want to keep this example active in your Portal.*
 
 
-# [Part 0]: Software Installs / Setup
+# [Part 0]: Software Installation / Setup
 1. You can get Visual Studio 2017 Community for free here: https://www.visualstudio.com/downloads/
-2. You can create a free Azure account with an MSDN / MyVisualStudio account or by signing up for a free month trial here: https://azure.microsoft.com/en-us/free/?v=17.39&WT.srch=1&WT.mc_id=AID631184_SEM_bp6n8E3v&lnkd=Google_Azure_
-3. You can sign up for a free VSTS account here: https://www.visualstudio.com/team-services/
-You need to make sure that you use the same email address for your Azure and VSTS account so they can automatically recognize each other's resources, otherwise you will need to add both emails to your Azure subscription. 
+2. You can install Git Bash here: https://git-scm.com/downloads
+3. You can create a free Azure account with an MSDN / MyVisualStudio account or by signing up for a free month trial here: https://azure.microsoft.com/en-us/free/?v=17.39&WT.srch=1&WT.mc_id=AID631184_SEM_bp6n8E3v&lnkd=Google_Azure_
+4. You use a VSTS personal account associated with your MSDN / MyVisualStudio or you can sign up for a free VSTS account here: https://www.visualstudio.com/team-services/
 
-# [Part 1]: Setup the C# Project
+*NOTE: You need to make sure that you use the same email address for your Azure and VSTS account so they can automatically recognize each other's resources, otherwise you will need to add both emails to your Azure subscription.*
+
+5. You can download SQL Server Management Server 2016 for free here: https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms
+
+# [Part 1]: Setup the C# Project, learn Swagger, and Deploy it manually to Azure
 1. Download this project if you haven't already (your should have in Part 1, step 9 though). 
 2. Open two solutions (ToDoListAngular and ToDoListAPI folders each contain a .sln file). Build each of the solutions.
 3. Go to the ToDoListDataAPI solution.. 
