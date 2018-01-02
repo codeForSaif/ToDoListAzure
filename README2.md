@@ -4,14 +4,14 @@ This is a simple proof of concept to display an Azure App Service website commun
 This tutorial is split into parts so that you can choose what you would like to complete. Depending on your interest, for example, you can complete Part 1 and Part 3, or just Part 1 and Part 2.
 
 Timing Estimates to complete full tutorial: 
-*Senior dev with Azure and VSTS experience: 1 hour
-*Senior dev with no Azure and VSTS experience: 2 hours
-*Junior dev: 3 - 5 hours
+* Senior dev with Azure and VSTS experience: 1 hour
+* Senior dev with no Azure and VSTS experience: 2 hours
+* Junior dev: 3 - 5 hours
 
-Azure Credit Costs: 
-*Each Basic DB costs $5 per month 
-*Basic App Services cost $0 (free)
-*VSTS account costs $0 for up to 5 Basic users (free)
+Azure Credit Costs (total is $5 per month): 
+* Each Basic DB costs $5 per month 
+* Basic App Services cost $0 (free)
+* VSTS account costs $0 for up to 5 Basic users (free)
 
 ### Overview of guide:
 **Part 1: Setup the C# Project, learn Swagger, and Deploy it manually to Azure**
